@@ -1,0 +1,27 @@
+[2020-07-15 15:56:47.786] [sharedprocess] [info] main {"machineId":"677c4e7fad726b873c9c3655032499a00a8462dd94798636a41a6cc31ea89bab","windowId":2}
+[2020-07-15 15:56:47.806] [sharedprocess] [error] [File Watcher (node.js)] Error: ENOENT: no such file or directory, stat '/home/ppacher/.config/Code - OSS/User/snippets'
+[2020-07-15 15:57:10.961] [sharedprocess] [info] Installing extension: knisterpeter.vscode-github
+[2020-07-15 15:57:11.444] [sharedprocess] [info] Downloaded extension: knisterpeter.vscode-github /home/ppacher/.config/Code - OSS/CachedExtensionVSIXs/knisterpeter.vscode-github-0.30.3
+[2020-07-15 15:57:12.176] [sharedprocess] [info] Extracted extension to /home/ppacher/.vscode-oss/extensions/.knisterpeter.vscode-github-0.30.3: knisterpeter.vscode-github
+[2020-07-15 15:57:12.176] [sharedprocess] [info] Renamed to /home/ppacher/.vscode-oss/extensions/knisterpeter.vscode-github-0.30.3
+[2020-07-15 15:57:12.177] [sharedprocess] [info] Installation completed. knisterpeter.vscode-github
+[2020-07-15 15:57:12.191] [sharedprocess] [info] Extensions installed successfully: knisterpeter.vscode-github
+[2020-07-15 15:57:13.161] [sharedprocess] [info] Installing extension: bierner.markdown-preview-github-styles
+[2020-07-15 15:57:14.267] [sharedprocess] [info] Downloaded extension: bierner.markdown-preview-github-styles /home/ppacher/.config/Code - OSS/CachedExtensionVSIXs/bierner.markdown-preview-github-styles-0.1.6
+[2020-07-15 15:57:14.512] [sharedprocess] [info] Extracted extension to /home/ppacher/.vscode-oss/extensions/.bierner.markdown-preview-github-styles-0.1.6: bierner.markdown-preview-github-styles
+[2020-07-15 15:57:14.512] [sharedprocess] [info] Renamed to /home/ppacher/.vscode-oss/extensions/bierner.markdown-preview-github-styles-0.1.6
+[2020-07-15 15:57:14.512] [sharedprocess] [info] Installation completed. bierner.markdown-preview-github-styles
+[2020-07-15 15:57:14.517] [sharedprocess] [info] Extensions installed successfully: bierner.markdown-preview-github-styles
+[2020-07-15 15:57:16.472] [sharedprocess] [info] Installing extension: github.github-vscode-theme
+[2020-07-15 15:57:17.466] [sharedprocess] [info] Downloaded extension: github.github-vscode-theme /home/ppacher/.config/Code - OSS/CachedExtensionVSIXs/github.github-vscode-theme-1.1.3
+[2020-07-15 15:57:17.479] [sharedprocess] [info] Extracted extension to /home/ppacher/.vscode-oss/extensions/.github.github-vscode-theme-1.1.3: github.github-vscode-theme
+[2020-07-15 15:57:17.479] [sharedprocess] [info] Renamed to /home/ppacher/.vscode-oss/extensions/github.github-vscode-theme-1.1.3
+[2020-07-15 15:57:17.480] [sharedprocess] [info] Installation completed. github.github-vscode-theme
+[2020-07-15 15:57:17.483] [sharedprocess] [info] Extensions installed successfully: github.github-vscode-theme
+[2020-07-15 15:57:27.800] [sharedprocess] [info] Starting to clean up unused language packs.
+[2020-07-15 15:57:28.862] [sharedprocess] [info] Installing extension: golang.go
+[2020-07-15 15:57:29.676] [sharedprocess] [info] Downloaded extension: golang.go /home/ppacher/.config/Code - OSS/CachedExtensionVSIXs/golang.go-0.15.1
+[2020-07-15 15:57:31.792] [sharedprocess] [info] Extracted extension to /home/ppacher/.vscode-oss/extensions/.golang.go-0.15.1: golang.go
+[2020-07-15 15:57:31.792] [sharedprocess] [info] Renamed to /home/ppacher/.vscode-oss/extensions/golang.go-0.15.1
+[2020-07-15 15:57:31.794] [sharedprocess] [info] Installation completed. golang.go
+[2020-07-15 15:57:31.807] [sharedprocess] [info] Extensions installed successfully: golang.go

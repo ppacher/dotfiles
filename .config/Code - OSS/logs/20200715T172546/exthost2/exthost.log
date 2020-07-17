@@ -1,0 +1,47 @@
+[2020-07-15 17:25:48.801] [exthost] [info] extension host started
+[2020-07-15 17:25:48.822] [exthost] [info] ExtensionService#_doActivateExtension sumneko.lua {"startup":false,"extensionId":{"value":"sumneko.lua","_lower":"sumneko.lua"},"activationEvent":"onLanguage:lua"}
+[2020-07-15 17:25:48.822] [exthost] [info] ExtensionService#loadCommonJSModule file:///home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/out/extension
+[2020-07-15 17:25:48.866] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch {"startup":true,"extensionId":{"value":"vscode.debug-auto-launch","_lower":"vscode.debug-auto-launch"},"activationEvent":"*"}
+[2020-07-15 17:25:48.866] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/debug-auto-launch/dist/extension
+[2020-07-15 17:25:48.871] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet {"startup":true,"extensionId":{"value":"vscode.emmet","_lower":"vscode.emmet"},"activationEvent":"*"}
+[2020-07-15 17:25:48.871] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/emmet/dist/extension
+[2020-07-15 17:25:48.878] [exthost] [info] ExtensionService#_doActivateExtension vscode.git {"startup":true,"extensionId":{"value":"vscode.github","_lower":"vscode.github"},"activationEvent":"*"}
+[2020-07-15 17:25:48.878] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/git/dist/main
+[2020-07-15 17:25:48.888] [exthost] [info] ExtensionService#_doActivateExtension vscode.github-authentication {"startup":true,"extensionId":{"value":"vscode.github-authentication","_lower":"vscode.github-authentication"},"activationEvent":"*"}
+[2020-07-15 17:25:48.889] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/github-authentication/dist/extension.js
+[2020-07-15 17:25:48.892] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict {"startup":true,"extensionId":{"value":"vscode.merge-conflict","_lower":"vscode.merge-conflict"},"activationEvent":"*"}
+[2020-07-15 17:25:48.892] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/merge-conflict/dist/mergeConflictMain
+[2020-07-15 17:25:48.894] [exthost] [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication {"startup":true,"extensionId":{"value":"vscode.microsoft-authentication","_lower":"vscode.microsoft-authentication"},"activationEvent":"*"}
+[2020-07-15 17:25:48.894] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/microsoft-authentication/dist/extension.js
+[2020-07-15 17:25:48.897] [exthost] [info] ExtensionService#_doActivateExtension vscode.search-result {"startup":true,"extensionId":{"value":"vscode.search-result","_lower":"vscode.search-result"},"activationEvent":"*"}
+[2020-07-15 17:25:48.897] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/search-result/dist/extension.js
+[2020-07-15 17:25:48.898] [exthost] [info] ExtensionService#_doActivateExtension KnisterPeter.vscode-github {"startup":true,"extensionId":{"value":"KnisterPeter.vscode-github","_lower":"knisterpeter.vscode-github"},"activationEvent":"*"}
+[2020-07-15 17:25:48.898] [exthost] [info] ExtensionService#loadCommonJSModule file:///home/ppacher/.vscode-oss/extensions/knisterpeter.vscode-github-0.30.3/out/src/main
+[2020-07-15 17:25:49.121] [exthost] [info] ExtensionService#_doActivateExtension vscode.github {"startup":true,"extensionId":{"value":"vscode.github","_lower":"vscode.github"},"activationEvent":"*"}
+[2020-07-15 17:25:49.121] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/github/dist/extension.js
+[2020-07-15 17:25:49.202] [exthost] [info] eager extensions activated
+[2020-07-15 19:13:49.662] [exthost] [info] ExtensionService#_doActivateExtension dlasagno.wal-theme {"startup":false,"extensionId":{"value":"dlasagno.wal-theme","_lower":"dlasagno.wal-theme"},"activationEvent":"*"}
+[2020-07-15 19:13:49.663] [exthost] [info] ExtensionService#loadCommonJSModule file:///home/ppacher/.vscode-oss/extensions/dlasagno.wal-theme-1.0.4/out/extension.js
+[2020-07-15 19:13:49.689] [exthost] [error] Activating extension dlasagno.wal-theme failed due to an error:
+[2020-07-15 19:13:49.691] [exthost] [error] Error: ENOENT: no such file or directory, watch '/home/ppacher/.cache/wal/colors'
+	at FSWatcher.start (internal/fs/watchers.js:165:26)
+	at Object.watch (fs.js:1270:11)
+	at autoUpdate (/home/ppacher/.vscode-oss/extensions/dlasagno.wal-theme-1.0.4/out/extension.js:79:15)
+	at activate (/home/ppacher/.vscode-oss/extensions/dlasagno.wal-theme-1.0.4/out/extension.js:24:29)
+	at Function._callActivateOptional (/usr/lib/code/out/vs/workbench/services/extensions/node/extensionHostProcess.js:837:509)
+	at Function._callActivate (/usr/lib/code/out/vs/workbench/services/extensions/node/extensionHostProcess.js:837:160)
+	at /usr/lib/code/out/vs/workbench/services/extensions/node/extensionHostProcess.js:835:703
+	at async Promise.all (index 0)
+	at async h.$activate (/usr/lib/code/out/vs/workbench/services/extensions/node/extensionHostProcess.js:843:297)
+[2020-07-15 19:13:54.119] [exthost] [info] ExtensionService#_doActivateExtension vscode.configuration-editing {"startup":false,"extensionId":{"value":"vscode.configuration-editing","_lower":"vscode.configuration-editing"},"activationEvent":"onLanguage:jsonc"}
+[2020-07-15 19:13:54.119] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/configuration-editing/dist/configurationEditingMain
+[2020-07-15 19:13:54.123] [exthost] [info] ExtensionService#_doActivateExtension vscode.json-language-features {"startup":false,"extensionId":{"value":"vscode.json-language-features","_lower":"vscode.json-language-features"},"activationEvent":"onLanguage:jsonc"}
+[2020-07-15 19:13:54.123] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/json-language-features/client/dist/node/jsonClientMain
+[2020-07-15 19:13:54.141] [exthost] [info] ExtensionService#_doActivateExtension vscode.typescript-language-features {"startup":false,"extensionId":{"value":"vscode.typescript-language-features","_lower":"vscode.typescript-language-features"},"activationEvent":"onLanguage:jsonc"}
+[2020-07-15 19:13:54.141] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/typescript-language-features/dist/extension
+[2020-07-15 19:15:19.995] [exthost] [info] ExtensionService#_doActivateExtension vscode.extension-editing {"startup":false,"extensionId":{"value":"vscode.extension-editing","_lower":"vscode.extension-editing"},"activationEvent":"onLanguage:json"}
+[2020-07-15 19:15:19.995] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/extension-editing/dist/extension
+[2020-07-15 19:15:20.000] [exthost] [info] ExtensionService#_doActivateExtension ms-vscode.js-debug {"startup":false,"extensionId":{"value":"ms-vscode.js-debug","_lower":"ms-vscode.js-debug"},"activationEvent":"onLanguage:json"}
+[2020-07-15 19:15:20.000] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/ms-vscode.js-debug/src/extension.js
+[2020-07-15 19:15:20.085] [exthost] [info] ExtensionService#_doActivateExtension vscode.npm {"startup":false,"extensionId":{"value":"vscode.npm","_lower":"vscode.npm"},"activationEvent":"onLanguage:json"}
+[2020-07-15 19:15:20.085] [exthost] [info] ExtensionService#loadCommonJSModule file:///usr/lib/code/extensions/npm/dist/npmMain

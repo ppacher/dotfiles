@@ -1,0 +1,9 @@
+...xtensions/sumneko.lua-0.19.4/server/script/workspace.lua:16: bad argument #1 to 'path' (string expected, got nil)
+stack traceback:
+	...xtensions/sumneko.lua-0.19.4/server/script/workspace.lua:16: in function <...xtensions/sumneko.lua-0.19.4/server/script/workspace.lua:15>
+	[C]: in function 'xpcall'
+	...ensions/sumneko.lua-0.19.4/server/script/async/async.lua:90: in upvalue 'callback'
+	...ensions/sumneko.lua-0.19.4/server/script/async/async.lua:117: in function 'async.onTick'
+	.../extensions/sumneko.lua-0.19.4/server/script/service.lua:1060: in method 'listen'
+	...vscode-oss/extensions/sumneko.lua-0.19.4/server/main.lua:23: in main chunk
+	[C]: in ?

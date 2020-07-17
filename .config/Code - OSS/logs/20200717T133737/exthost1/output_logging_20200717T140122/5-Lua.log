@@ -1,0 +1,85 @@
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/documentSymbol failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/documentSymbol failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
+[Error - 2:01:22 PM] Request textDocument/foldingRange failed.
+Error: Connection got disposed.
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-jsonrpc/lib/common/connection.js:1009:27)
+	at Object.dispose (/home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:71:35)
+	at /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.4/client/node_modules/vscode-languageclient/lib/common/client.js:2203:28
