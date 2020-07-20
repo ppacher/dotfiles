@@ -15,6 +15,31 @@ print("config: theme loaded")
 
 -- }}}
 
+-- {{{ Error handling
+-- Check if awesome encountered an error during startup and fell back to
+-- another config (This code will only ever execute for the fallback config)
+local naughty = require("naughty")
+if _G.awesome.startup_errors then
+    naughty.notify({ preset = naughty.config.presets.critical,
+                     title = "Oops, there were errors during startup!",
+                     text = _G.awesome.startup_errors })
+end
+
+-- Handle runtime errors after startup
+do
+    local in_error = false
+    _G.awesome.connect_signal("debug::error", function (err)
+        -- Make sure we don't go into an endless error loop
+        if in_error then return end
+        in_error = true
+
+        naughty.notify({ preset = naughty.config.presets.critical,
+                         title = "Oops, an error happened!",
+                         text = tostring(err) })
+        in_error = false
+    end)
+end
+-- }}}
 
 -- Client and keys and layouts configuration {{{
 -- ------------------------------------
@@ -54,6 +79,7 @@ screen_height = awful.screen.focused().geometry.height
 require("awful.hotkeys_popup.keys")
 
 local helpers = require("helpers")
+
 
 -- Listeners
 --require("ears")
@@ -258,12 +284,26 @@ client.connect_signal("request::titlebars", function(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
-end)
+_G.client.connect_signal(
+    'mouse::enter',
+    function(c)
+        c:emit_signal('request::activate', 'mouse_enter', {raise = false})
+    end
+)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
+-- Change client border when focused/unfocused
+_G.client.connect_signal(
+    'focus', 
+    function(c)
+        c.border_color = beautiful.border_focus
+    end
+)
+_G.client.connect_signal(
+    'unfocus', 
+    function(c)
+        c.border_color = beautiful.border_normal
+    end
+)
+
 
 _G.root.keys(require('config.keys.global'))

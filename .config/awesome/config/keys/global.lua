@@ -149,30 +149,6 @@ local globalKeys = gears.table.join(
         {description = "view next non-empty tag", group = "tag"}
     ),
 
-    -- Dynamic tags
-    --
-    awful.key(
-        {modkey, 'Shift'},
-        'c',
-        function()
-            apps.ask("Tagname", function(name)
-                name = string.gsub(name, "n", "") -- remove newlines
-                if not name or #name == 0 then return end
-                print("name: " .. name)
-                _G.tag.create(name)
-            end)
-        end,
-        { description = "Create a new tag", group = 'tag' }
-    ),
-    awful.key(
-        {modkey, 'Shift'},
-        'd',
-        function()
-            _G.tag.delete_selected()
-        end,
-        { description = "Delete selected tag", group = 'tag' }
-    ),
-
     -- Application Launcher
     --
     awful.key(
@@ -189,7 +165,7 @@ local globalKeys = gears.table.join(
         {},
         'XF86HomePage',
         function()
-            _G.exit_screen_show()
+            _G.awesome.emit_signal('module::exit_screen_show')
         end,
         {description = "show exit screen", group = "launcher"}
     )

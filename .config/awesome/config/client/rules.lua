@@ -54,6 +54,19 @@ ruled.client.connect_signal('request::rules', function()
     }
 
     ruled.client.append_rule {
+      id = "kitty",
+      rule_any = {
+        class = { "kitty" }
+      },
+      properties = {
+        floating = true,
+        placement = awful.placement.centered,
+        rounded_corners = true,
+        drawBackdrop = false,
+      }
+    }
+
+    ruled.client.append_rule {
       id = "floating",
       rule_any = {
         instance = {

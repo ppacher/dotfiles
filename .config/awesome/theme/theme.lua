@@ -41,7 +41,8 @@ theme.xcolor12 =     xrdb.color12     or  "#7191b1"
 theme.xcolor13 =     xrdb.color13     or  "#a6809f" 
 theme.xcolor14 =     xrdb.color14     or  "#7dbba8" 
 theme.xcolor15 =     xrdb.color15     or  "#d1d5dc" 
-theme.font          = "Iosevka Extended 9"
+theme.font          = "Iosevka Extended 10"
+theme.font_bold     = "awesomewm-font 10" -- "Iosevka Extended 11"
 theme.font1 	    = "Font Awesome 5 Free 8"
 theme.bg_dark       = theme.xcolor0
 theme.bg_normal     = theme.xbackground
@@ -55,13 +56,33 @@ theme.fg_focus      = theme.xcolor4
 theme.fg_urgent     = theme.xcolor3
 theme.fg_minimize   = theme.xcolor8
 
+-- Pretty color names
+theme.system_black_dark = '#3D4C5F'
+theme.system_black_light = '#56687E'
+theme.system_red_dark = '#EE4F84'
+theme.system_red_light = '#F48FB1'
+theme.system_green_dark = '#53E2AE'
+theme.system_green_light = '#A1EFD3'
+theme.system_yellow_dark = '#F1FF52'
+theme.system_yellow_light = '#F1FA8C'
+theme.system_blue_dark = '#6498EF' 
+theme.system_blue_light = '#92B6F4'
+theme.system_magenta_dark = '#985EFF'
+theme.system_magenta_light = '#BD99FF'
+theme.system_cyan_dark = '#24D1E7'
+theme.system_cyan_light = '#26c6da' 
+theme.system_white_dark = '#E5E5E5'
+theme.system_white_light = '#F8F8F2'
+
+
+
 -- Borders
-theme.border_width  = dpi(0)
+theme.border_width  = dpi(1)
 -- theme.border_color = theme.xcolor0
 theme.border_normal = theme.xbackground
 theme.border_focus  = theme.xcolor0
 -- Rounded corners
-theme.border_radius = dpi(0)
+theme.border_radius = dpi(5)
 
 -- There are other variable sets
 -- overriding the default one when
@@ -77,7 +98,7 @@ theme.border_radius = dpi(0)
 --theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(0)
+local taglist_square_size = dpi(1)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
     taglist_square_size, theme.fg_normal
 )

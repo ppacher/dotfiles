@@ -1,9 +1,0 @@
-[2020-07-17 13:37:41.325] [sharedprocess] [info] main {"machineId":"677c4e7fad726b873c9c3655032499a00a8462dd94798636a41a6cc31ea89bab","windowId":2}
-[2020-07-17 13:37:41.458] [sharedprocess] [info] Deleted from disk dlasagno.wal-theme /home/ppacher/.vscode-oss/extensions/dlasagno.wal-theme-1.0.4
-[2020-07-17 13:37:43.075] [sharedprocess] [info] Installing extension: sumneko.lua
-[2020-07-17 13:37:44.525] [sharedprocess] [info] Downloaded extension: sumneko.lua /home/ppacher/.config/Code - OSS/CachedExtensionVSIXs/sumneko.lua-0.19.6
-[2020-07-17 13:37:45.076] [sharedprocess] [info] Extracted extension to /home/ppacher/.vscode-oss/extensions/.sumneko.lua-0.19.6: sumneko.lua
-[2020-07-17 13:37:45.077] [sharedprocess] [info] Renamed to /home/ppacher/.vscode-oss/extensions/sumneko.lua-0.19.6
-[2020-07-17 13:37:45.078] [sharedprocess] [info] Installation completed. sumneko.lua
-[2020-07-17 13:37:45.089] [sharedprocess] [info] Extensions installed successfully: sumneko.lua
-[2020-07-17 13:38:21.342] [sharedprocess] [info] Starting to clean up unused language packs.

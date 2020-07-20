@@ -36,7 +36,9 @@ local reboot_command = function()
     awful.spawn.with_shell("systemctl reboot")
 end
 local suspend_command = function()
-    lock_screen_show()
+    if lock_screen_show then
+        lock_screen_show()
+    end
     awful.spawn.with_shell("systemctl suspend")
 end
 local exit_command = function()
@@ -78,20 +80,24 @@ local create_button = function(symbol, hover_color, text, command)
 
     -- Bind left click to run the command
     button:buttons(gears.table.join(
-    awful.button({ }, 1, function ()
-        command()
-    end)
+        awful.button({ }, 1, command)
     ))
 
     -- Change color on hover
-    button:connect_signal("mouse::enter", function ()
-        icon.markup = helpers.colorize_text(icon.text, hover_color)
-        button.border_color = hover_color
-    end)
-    button:connect_signal("mouse::leave", function ()
-        icon.markup = helpers.colorize_text(icon.text, beautiful.xforeground)
-        button.border_color = button_bg
-    end)
+    button:connect_signal(
+        "mouse::enter",
+        function ()
+            icon.markup = helpers.colorize_text(icon.text, hover_color)
+            button.border_color = hover_color
+        end
+    )
+    button:connect_signal(
+        "mouse::leave",
+        function ()
+            icon.markup = helpers.colorize_text(icon.text, beautiful.xforeground)
+            button.border_color = button_bg
+        end
+    )
 
     -- Use helper function to change the cursor on hover
     helpers.add_hover_cursor(button, "hand1")
@@ -107,87 +113,125 @@ local suspend = create_button(suspend_text_icon, beautiful.xcolor3, "Suspend", s
 local exit = create_button(exit_text_icon, beautiful.xcolor4, "Exit", exit_command)
 local lock = create_button(lock_text_icon, beautiful.xcolor5, "Lock", lock_command)
 
--- Create the exit screen wibox
-local exit_screen = wibox {
-    visible = false,
-    ontop = true,
-    type = "dialog"
+-- Greeter and profile message boxes.
+local greeter_message = wibox.widget { 
+    markup = "Choose wisely!",
+    font = "Inter UltraLight 48",
+    align = "center",
+    valign = "center",
+    widget = wibox.widget.textbox
 }
 
-awful.placement.maximize(exit_screen)
+_G.screen.connect_signal(
+    'request::desktop_decoration',
+    function(s)
 
-exit_screen.bg = beautiful.exit_screen_bg or exitscreen_bg or "#111111"
-exit_screen.fg = beautiful.exit_screen_fg or beautiful.wibar_fg or "#FEFEFE"
-
-local exit_screen_grabber
-local function exit_screen_hide()
-    awful.keygrabber.stop(exit_screen_grabber)
-    exit_screen.visible = false
-end
-
-function _G.exit_screen_show(s)
-    local scr = s or _G.mouse.screen
-
-    exit_screen.screen = scr
-
-    exit_screen_grabber = awful.keygrabber.run(function(_, key, event)
-        -- Ignore case
-        key = key:lower()
-
-        if event == "release" then return end
-
-        if key == 's' then
-            suspend_command()
-            exit_screen_hide()
-            -- 'e' for exit
-        elseif key == 'e' then
-            exit_command()
-        elseif key == 'l' then
-            exit_screen_hide()
-            lock_command()
-        elseif key == 'p' then
-            poweroff_command()
-        elseif key == 'r' then
-            reboot_command()
-        elseif key == 'escape' or key == 'q' or key == 'x' then
-            exit_screen_hide()
-        end
-    end)
-    exit_screen.visible = true
-end
-
-exit_screen:buttons(gears.table.join(
--- Left click - Hide exit_screen
-awful.button({ }, 1, function ()
-    exit_screen_hide()
-end),
--- Middle click - Hide exit_screen
-awful.button({ }, 2, function ()
-    exit_screen_hide()
-end),
--- Right click - Hide exit_screen
-awful.button({ }, 3, function ()
-    exit_screen_hide()
-end)
-))
-
--- Item placement
-exit_screen:setup {
-    nil,
-    {
-        nil,
+        s.exit_screen = wibox
         {
-            poweroff,
-            reboot,
-            suspend,
-            exit,
-            lock,
-            spacing = dpi(50),
-            layout = wibox.layout.fixed.horizontal
-        },
-        expand = "none",
-        layout = wibox.layout.align.horizontal
-    },
-    expand = "none",
-    layout = wibox.layout.align.vertical
-}
+            screen = s,
+            type = 'splash',
+            visible = false,
+            ontop = true,
+            fg = "#FEFEFE",
+            bg = "#000000a0",
+            height = s.geometry.height,
+            width = s.geometry.width,
+            x = s.geometry.x,
+            y = s.geometry.y,
+        }
+        print("[module:exit_screen] created per-screen wibox")
+
+        local function exit_screen_hide()
+            _G.awesome.emit_signal('module::exit_screen_hide')
+        end
+
+        local exit_screen_grabber = awful.keygrabber {
+            auto_start = true,
+            stop_event = 'release',
+            keypressed_callback = function(self, mod, key, command)
+                -- Ignore case
+                key = key:lower()
+
+                if key == 's' then
+                    suspend_command()
+                elseif key == 'e' then
+                    exit_command()
+                elseif key == 'l' then
+                    lock_command()
+                elseif key == 'p' then
+                    poweroff_command()
+                elseif key == 'r' then
+                    reboot_command()
+                elseif key == 'escape' or key == 'q' or key == 'x' then
+                    exit_screen_hide()
+                end
+            end
+        }
+
+        _G.awesome.connect_signal(
+            'module::exit_screen_show',
+            function()
+                print("[module:exit_screen] signal module::exit_screen_show received")
+                for s in _G.screen do
+                    s.exit_screen.visible = false
+                end
+                awful.screen.focused().exit_screen.visible = true
+                exit_screen_grabber:start()
+            end
+        )
+        _G.awesome.connect_signal(
+            'module::exit_screen_hide',
+            function()
+                print("[module:exit_screen] signal module::exit_screen_hide received")
+                exit_screen_grabber:stop()
+                for s in _G.screen do
+                    s.exit_screen.visible = false
+                end
+            end
+        )
+
+        s.exit_screen : buttons(gears.table.join(
+            -- Left click - Hide exit_screen
+            awful.button({ }, 1, function ()
+                exit_screen_hide()
+            end),
+            -- Middle click - Hide exit_screen
+            awful.button({ }, 2, function ()
+                exit_screen_hide()
+            end),
+            -- Right click - Hide exit_screen
+            awful.button({ }, 3, function ()
+                exit_screen_hide()
+            end)
+        ))
+
+        s.exit_screen : setup {
+            nil,
+             {
+                 nil,
+                 {
+                     greeter_message,
+                     {
+                         poweroff,
+                         reboot,
+                         suspend,
+                         exit,
+                         lock,
+                         spacing = dpi(50),
+                         layout = wibox.layout.fixed.horizontal
+                     },
+                     nil,
+                     spacing = dpi(40),
+                     layout = wibox.layout.fixed.vertical,
+                 },
+                 nil,
+                 expand = "none",
+                 layout = wibox.layout.align.horizontal
+             },
+             nil,
+             expand = "none",
+             layout = wibox.layout.align.vertical
+         }
+         
+    end
+)
