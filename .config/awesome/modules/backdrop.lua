@@ -62,7 +62,9 @@ local function backdrop(c)
     c:connect_signal(
       'unmanage',
       function()
-        c.backdrop.visible = false
+        if c then
+          c.backdrop.visible = false
+        end
       end
     )
     c:connect_signal(

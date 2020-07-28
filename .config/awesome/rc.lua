@@ -177,9 +177,14 @@ client.connect_signal("property::floating", function(c)
 end)
 
 client.connect_signal("manage", function(c)
+    print("managing client " .. tostring(c.skip_decoration))
     if c.floating or c.first_tag.layout.name == "floating" then
         awful.titlebar.show(c)
     else
+        awful.titlebar.hide(c)
+    end
+
+    if c.skip_decoration then
         awful.titlebar.hide(c)
     end
 end)
@@ -255,7 +260,7 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c,{size = beautiful.titlebar_size}) : setup {
+    awful.titlebar(c, {size = beautiful.titlebar_size}) : setup {
         { -- Left
 --          awful.titlebar.widget.iconwidget     (c),
 --          awful.titlebar.widget.ontopbutton    (c),

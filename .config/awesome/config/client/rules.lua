@@ -37,7 +37,7 @@ ruled.client.connect_signal('request::rules', function()
       rule_any = {
         type = {"dialog"},
         instance = {"pinentry"},
-        class = { "Pavucontrol" }
+        class = { "Pavucontrol", "pinentry-gtk-2", "Wine" }
       },
       properties = {
         placement = awful.placement.centered,
@@ -62,7 +62,6 @@ ruled.client.connect_signal('request::rules', function()
         floating = true,
         placement = awful.placement.centered,
         rounded_corners = true,
-        drawBackdrop = false,
       }
     }
 
