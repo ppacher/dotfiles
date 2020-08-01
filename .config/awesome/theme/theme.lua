@@ -75,7 +75,6 @@ theme.system_white_dark = '#E5E5E5'
 theme.system_white_light = '#F8F8F2'
 
 
-
 -- Borders
 theme.border_width  = dpi(1)
 -- theme.border_color = theme.xcolor0
@@ -160,14 +159,9 @@ theme.titlebar_fg_normal = theme.xcolor4
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
---theme.bg_widget = "#cc0000"
--- Notifications
--- Position: bottom_left, bottom_right, bottom_middle,
---         top_left, top_right, top_middle
--- BUG: some notifications (e.g. by notify-send) appear at top_right regardless of this setting
 theme.notification_position = "top_left" 
 theme.notification_border_color = theme.xbackground
-theme.notification_bg = theme.xbackground
+theme.notification_bg = theme.xbackground .. 'b0'
 theme.notification_fg = theme.xforeground
 theme.notification_icon_size = dpi(60)
 --theme.notification_height = dpi(80)
@@ -177,12 +171,6 @@ theme.notification_opacity = 1
 theme.notification_font = theme.font
 theme.notification_padding = dpi(6)
 theme.notification_spacing = dpi(6)
-
-local curvy_shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, theme.border_radius)
-end
-
-theme.notification_shape = curvy_shape
 
 -- Edge snap
 theme.snap_bg = theme.xcolor4

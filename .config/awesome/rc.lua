@@ -64,7 +64,7 @@ require("modules.notifications")
 -- Layout {{{
 -- ------------------------------------
 require("layout.toppanel")
-
+require("layout.sidebar")
 --}}}
 
 -- Widget and layout library

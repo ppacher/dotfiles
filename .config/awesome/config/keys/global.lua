@@ -1,6 +1,6 @@
 local awful = require('awful')
 local gears = require('gears')
-local awesome, client = _G.awesome, _G.client
+local awesome, client, screen = _G.awesome, _G.client, _G.screen
 
 
 require('awful.autofocus')
@@ -21,6 +21,19 @@ local globalKeys = gears.table.join(
         'Return',
         function()
             awful.spawn.with_shell(apps.terminal)
+        end
+    ),
+
+    -- Default tag apps
+    --
+    awful.key(
+        {modkey, 'Shift'},
+        'Return',
+        function()
+            local selected_tag = awful.screen.focused().selected_tag
+            if selected_tag ~= nil and selected_tag.default_app then
+                awful.spawn.with_shell(selected_tag.default_app)
+            end
         end
     ),
     

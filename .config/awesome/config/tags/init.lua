@@ -7,18 +7,19 @@ local apps = require('config.apps')
 
 local tags = {
     {
-        name = '1',
+        name = '',
         type = 'terminal',
         default_app = apps.terminal,
     },
     {
-        name = '2',
+        name = '',
         type = 'web',
-        default_app = apps.browser },
+        default_app = apps.browser
+    },
 
     -- tags only for screen one
     {
-        name = '3',
+        name = '',
         type = 'music',
         default_app = 'spotify',
         screen = 1,
@@ -26,7 +27,7 @@ local tags = {
 
     -- tags only for screen two
     {
-        name = '3',
+        name = '',
         type = 'games',
         default_app = 'minecraft-launcher',
         screen = 2
