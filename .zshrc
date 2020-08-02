@@ -99,6 +99,11 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
+#
+# Profile support
+#
+source ${HOME}/.profile
+
 # Aliases
 alias v=nvim
 alias icat="kitty +kitten icat"

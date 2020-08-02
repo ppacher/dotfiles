@@ -44,7 +44,8 @@ ruled.notification.connect_signal('request::rules', function()
 		rule       = { urgency = 'critical' },
 		properties = { 
 			font        		= beautiful.font_bold,
-            fg 					= '#000000',
+			fg 					= '#000000',
+			bg = beautiful.xcolor9 .. 'a0',
 			margin 				= dpi(16),
 			position 			= 'top_right',
 			implicit_timeout	= 0
@@ -56,7 +57,7 @@ ruled.notification.connect_signal('request::rules', function()
 		rule       = { urgency = 'normal' },
 		properties = {
 			font        		= beautiful.font_bold,
-			bg      			= beautiful.transparent, 
+			bg      			= nil,
 			fg 					= "#ffffff", -- beautiful.fg_normal,
 			margin 				= dpi(16),
 			position 			= 'top_right',
@@ -70,7 +71,7 @@ ruled.notification.connect_signal('request::rules', function()
 		rule       = { urgency = 'low' },
 		properties = { 
 			font        		= beautiful.font,
-			bg     				= beautiful.transparent,
+			bg     				= nil,
 			fg 					= "#ffffff", -- beautiful.fg_normal,,
 			margin 				= dpi(16),
 			position 			= 'top_right',
@@ -149,49 +150,68 @@ naughty.connect_signal("request::display", function(n)
 			{
 				-- Minimum size constraint
 				{
-					-- padding
-					{
-						-- vertical
 						{
-							naughty.widget.icon,
 							{
 								{
 									nil,
-									{
-										align = "left",
-										markup = "<b>" .. n.title .. "</b>",
-										widget = wibox.widget.textbox,
-										font = 'Iosevka Extended 12'
-									},
-									{
-										align = "left",
-										markup = n.message,
-										font = 'Iosevka Extended 12',
-										widget = wibox.widget.textbox,
-									},
+									naughty.widget.icon,
+									nil,
+									expand = "none",
 									layout = wibox.layout.align.vertical,
 								},
-								left = n.icon and dpi(15),
 								widget = wibox.container.margin,
+								margins = dpi(10),
 							},
-							layout = wibox.layout.align.horizontal,
-						},
+							widget = wibox.container.background,
+							bg = n.bg or beautiful.xbackground .. 'a0',
+						},	
 						{
-							-- padding if actions exist
-							helpers.vertical_pad(dpi(16)),
 							{
-								nil,
-								actions_template,
-								expand = "none",
-								layout = wibox.layout.align.horizontal,
+								-- vertical
+								{
+									{
+										{
+											nil,
+											{
+												align = "left",
+												markup = "<b>" .. n.title .. "</b>",
+												widget = wibox.widget.textbox,
+												font = 'Iosevka Extended 12'
+											},
+											{
+												align = "left",
+												markup = n.message,
+												font = 'Iosevka Extended 12',
+												widget = wibox.widget.textbox,
+											},
+											layout = wibox.layout.align.vertical,
+										},
+										left = n.icon and dpi(15),
+										widget = wibox.container.margin,
+									},
+									layout = wibox.layout.align.horizontal,
+								},
+								{
+									-- padding if actions exist
+									helpers.vertical_pad(dpi(16)),
+									{
+										nil,
+										actions_template,
+										expand = "none",
+										layout = wibox.layout.align.horizontal,
+									},
+									visible = n.actions and #n.actions > 0,
+									layout = wibox.layout.fixed.vertical,
+								},
+								layout = wibox.layout.fixed.vertical,
 							},
-							visible = n.actions and #n.actions > 0,
-							layout = wibox.layout.fixed.vertical,
+							widget = wibox.container.margin,
+							top = dpi(10),
+							left = dpi(10),
+							bottom = dpi(10),
+							right = dpi(50),
 						},
-						layout = wibox.layout.fixed.vertical,
-					},
-					margins = dpi(14),
-					widget = wibox.container.margin,
+						layout = wibox.layout.align.horizontal,
 				},
 				strategy = "min",
 				width = dpi(250),
