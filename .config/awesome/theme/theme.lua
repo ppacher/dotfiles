@@ -116,7 +116,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 -- menu_[border_color|border_width]
 
 -- Taglist
-theme.taglist_font = "awesomewm-font 10"
+theme.taglist_font = "awesomewm-font 13"
 theme.taglist_bg = theme.xbackground
 --theme.taglist_shape = gears.shape.triagle
 theme.taglist_bg_focus = theme.xbackground
@@ -161,7 +161,7 @@ theme.titlebar_fg_normal = theme.xcolor4
 -- beautiful.variable in your rc.lua
 theme.notification_position = "top_left" 
 theme.notification_border_color = theme.xbackground
-theme.notification_bg = theme.xbackground .. 'b0'
+theme.notification_bg = theme.xbackground .. 'cf'
 theme.notification_fg = theme.xforeground
 theme.notification_icon_size = dpi(60)
 --theme.notification_height = dpi(80)

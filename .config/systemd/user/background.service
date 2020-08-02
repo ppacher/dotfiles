@@ -1,0 +1,9 @@
+[Unit]
+Description=Set Desktop background
+
+[Service]
+Type=oneshot
+ExecStart=bash -c "/usr/bin/feh --bg-fill $HOME/Pictures/wallpapers/wall.png"
+
+[Install]
+WantedBy=default.target

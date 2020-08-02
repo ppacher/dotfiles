@@ -1,0 +1,10 @@
+[Unit]
+Description=Picom Compositor
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/picom --experimental-backend --dbus
+
+[Install]
+WantedBy=default.target

@@ -99,12 +99,11 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
-export PATH=$HOME/.bin:$PATH
-
 # Aliases
 alias v=nvim
 alias icat="kitty +kitten icat"
 alias c="clear"
+alias systemctl="systemctl --user"
 
 # Dotbare
 export DOTBARE_DIR="$HOME/.cfg"
@@ -112,5 +111,7 @@ export DOTBARE_TREE="$HOME"
 
 # For colored man pages
 export PAGER="most"
+
+dbus-update-activation-environment --systemd --all
 
 clear ; lastlogin ; fetch

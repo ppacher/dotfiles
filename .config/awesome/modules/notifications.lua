@@ -104,12 +104,6 @@ end)
 
 -- Naughty template
 naughty.connect_signal("request::display", function(n)
-	local color = n.bg or beautiful.system_cyan_light
-	
-	if n.urgency == 'critical' then
-		color = beautiful.system_black_light
-	end
-	
 	-- naughty.actions template
 	local actions_template = wibox.widget {
 		notification = n,
@@ -131,7 +125,7 @@ naughty.connect_signal("request::display", function(n)
 					widget = clickable_container
 				},
 				bg                 = beautiful.groups_bg,
-				shape              = gears.shape.rounded_rect,
+				--shape              = gears.shape.rounded_rect,
 				forced_height      = dpi(30),
 				widget             = wibox.container.background
 			},

@@ -8,7 +8,5 @@ return {
     launcher = "~/.config/rofi/launchers/launcher.sh",
     run_on_start = {
         "setxkbmap -layout de",
-        "feh --bg-fill /home/paz/Pictures/wallpapers/wall.png",
-        "picom -b --experimental-backends --dbus --config " .. "~/.config/picom/picom.conf"
     },
 }
