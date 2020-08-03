@@ -37,13 +37,30 @@ ruled.client.connect_signal('request::rules', function()
       rule_any = {
         type = {"dialog"},
         instance = {"pinentry"},
-        class = { "Pavucontrol", "pinentry-gtk-2", "Wine" }
+        class = { "Pavucontrol", "pinentry-gtk-2", "Wine"}
       },
       properties = {
         placement = awful.placement.centered,
         ontop = true,
         floating = true,
         drawBackdrop = true,
+        shape = function()
+          return function(cr, w, h)
+            gears.shape.rounded_rect(cr, w, h, 8)
+          end
+        end,
+        skip_decoration = true
+      }
+    }
+
+    ruled.client.append_rule {
+      id = "steam",
+      rule_any = {
+        name = { "Steam" },
+        class = { "Steam" }
+      },
+      properties = {
+        floating = true,
         shape = function()
           return function(cr, w, h)
             gears.shape.rounded_rect(cr, w, h, 8)
@@ -68,17 +85,10 @@ ruled.client.connect_signal('request::rules', function()
     ruled.client.append_rule {
       id = "floating",
       rule_any = {
-        instance = {
-          "DTA",  -- Firefox addon DownThemAll.
-          "copyq",  -- Includes session name in class.
-          "pinentry",
-        },
         class = {
           "Arandr",
           "Blueman-manager",
           "Gpick",
-          "Kruler",
-          "MessageWin",  -- kalarm.
           "Sxiv",
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",

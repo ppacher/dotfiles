@@ -160,7 +160,7 @@ theme.titlebar_fg_normal = theme.xcolor4
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
 theme.notification_position = "top_left" 
-theme.notification_border_color = theme.xbackground
+theme.notification_border_color = theme.xbackground .. 'cf'
 theme.notification_bg = theme.xbackground .. 'cf'
 theme.notification_fg = theme.xforeground
 theme.notification_icon_size = dpi(60)

@@ -1,0 +1,3 @@
+[submodule ".oh-my-zsh/plugins/fzf-zsh-completions"]
+	path = .oh-my-zsh/plugins/fzf-zsh-completions
+	url = https://github.com/chitoku-k/fzf-zsh-completions

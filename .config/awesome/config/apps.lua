@@ -8,5 +8,6 @@ return {
     launcher = "~/.config/rofi/launchers/launcher.sh",
     run_on_start = {
         "setxkbmap -layout de",
+        "systemctl --user restart picom", -- the current git version sometimes doesn't like an awesome restart
     },
 }

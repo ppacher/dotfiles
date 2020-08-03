@@ -1,0 +1,58 @@
+# Maintainer: Patrick Pacher <patrick.pacher@gmail.com>
+pkgname=dotfile-dependencies
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Package dependencies for Patrick's dotfiles."
+arch=('x86_64')
+url=""
+license=('GPL')
+groups=()
+depends=(
+  #
+  # Window Managment and Composition
+  #
+  'awesome-git'
+  'feh'
+  'picom-tryone-git'
+  'rofi-git'
+
+  #
+  # Apps
+  #
+  'kitty'
+
+  #
+  # Scripting
+  #
+  'notify-send.sh' 
+
+  #
+  # Terminal Experience
+  #
+  'neovim'
+  'fzf'               
+  'fd'      # find replacement
+  'bat'     # cat replacement
+  'exa'     # ls replacement
+  'emoji-cli-git'
+  'diff-so-fancy'
+  'zsh'
+
+  #
+  # Fonts
+  #
+  'ttf-font-awesome'
+  'ttf-font-awesome-4' # TODO(ppacher): remove the x4 version?
+  'ttf-iosevka'
+)
+optdepends=(
+  'cava: music visualizer'
+  'firefox-nightly: Better browsing'
+)
+source=()
+md5sums=()
+
+package() {
+  # this is just a list of dependencies
+  echo "Nothing to do"
+}

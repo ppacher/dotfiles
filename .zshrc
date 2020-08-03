@@ -68,7 +68,7 @@ ZSH_THEME="ys"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git dotbare)
+plugins=(git forgit dotbare fzf-zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,19 +104,38 @@ source $ZSH/oh-my-zsh.sh
 #
 source ${HOME}/.profile
 
+#
 # Aliases
+#
 alias v=nvim
 alias icat="kitty +kitten icat"
 alias c="clear"
 alias systemctl="systemctl --user"
+
+#
+# Enable common command replacments
+#
+alias cat=bat 
+alias ls=exa
 
 # Dotbare
 export DOTBARE_DIR="$HOME/.cfg"
 export DOTBARE_TREE="$HOME"
 
 # For colored man pages
-export PAGER="most"
+export PAGER="less"
+
+#
+# FZF
+#
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
 
 dbus-update-activation-environment --systemd --all
+
+#
+# Emoji-cli
+#
+source /usr/share/zsh/plugins/emoji-cli/emoji-cli.zsh
 
 clear ; lastlogin ; fetch
