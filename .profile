@@ -11,9 +11,6 @@ if [[ -n "$SSH_CONNECTION" ]]; then
     export PINENTRY_USER_DATA="USE_CURSES=1"
 fi
 
-export ANDROID_HOME=~/Android/Sdk
-export ANDROID_NDK_HOME=/opt/android-ndk
-
 #
 # Load environment files from systemd environment.d(5).
 #
