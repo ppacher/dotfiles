@@ -24,7 +24,14 @@ depends=(
   #
   # Scripting
   #
-  'notify-send.sh' 
+  'notify-send.sh'
+
+  #
+  # Tools in .bin
+  #
+  'giph'
+  'slop'
+  'imagemagick'
 
   #
   # Terminal Experience

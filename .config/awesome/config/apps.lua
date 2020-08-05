@@ -6,6 +6,8 @@ return {
     terminal = 'kitty',
     browser = 'google-chrome-stable',
     launcher = "~/.config/rofi/launchers/launcher.sh",
+    shoot = '~/.bin/shoot',
+    shoot_sel = '~/.bin/shoot sel',
     run_on_start = {
         "setxkbmap -layout de",
         "systemctl --user restart picom", -- the current git version sometimes doesn't like an awesome restart

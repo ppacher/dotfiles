@@ -14,4 +14,4 @@ else
     import -window root $file
 fi
 
-notify-send -i $file "Saved as $img"
+notify-send.sh -i $file "Saved as $img" -o "Show:feh $file"

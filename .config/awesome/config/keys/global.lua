@@ -173,6 +173,26 @@ local globalKeys = gears.table.join(
         {description = "open application drawer", group = 'launcher'}
     ),
 
+    -- Utilities
+    --
+    awful.key({
+        { modkey },
+        'Print',
+        function()
+            print("shoot")
+            awful.spawn.with_shell(apps.shoot_sel)
+        end,
+        {description = 'take a screenshot', group = 'utils'}
+    }),
+    awful.key({
+        {'Shift'},
+        'Print',
+        function()
+            awful.spawn.with_shell(apps.shoot)
+        end,
+        {description = 'take a screenshot', group = 'utils'}
+    }),
+
     -- Exit Screen
     awful.key(
         {},
