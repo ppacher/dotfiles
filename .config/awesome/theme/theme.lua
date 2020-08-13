@@ -198,7 +198,7 @@ theme.menu_fg_normal = theme.xcolor7
 theme.menu_submenu_icon = "~/.config/awesome/theme/icons/submenu.png"
 theme.menu_height = dpi(20)
 theme.menu_width  = dpi(130)
-theme.menu_border_color  = "#0000000"
+theme.menu_border_color  = "#00000000"
 --theme.menu_border_color  = theme.xbackground
 theme.menu_border_width  = dpi(0)
 -- pop up

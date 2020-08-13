@@ -143,7 +143,7 @@ naughty.connect_signal("request::display", function(n)
 	-- Custom notification layout
 	naughty.layout.box {
 		notification = n,
-		screen = awful.screen.preferred(),
+		screen = awful.screen.focused(),
 		shape = helpers.rrect(dpi(6)),
 		widget_template = {
 			-- Maximum size constraint

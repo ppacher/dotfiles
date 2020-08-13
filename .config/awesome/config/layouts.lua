@@ -1,5 +1,6 @@
 local awful = require("awful")
 
+awful.layout.remove_default_layout()
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,

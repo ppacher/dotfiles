@@ -257,7 +257,7 @@ local function update_widget()
       local title = stdout:match('@@(.*)@')
       local cover_path = stdout:match('##(.*)##')
       local status = stdout:match('%[(.*)%]')
-      status = string.gsub(status, '^%s*(.-)%s*$', '%1')
+      status = string.gsub(status or "", '^%s*(.-)%s*$', '%1')
 
       local artist_span = "-->   "  .. artist .. "    "
       local title_span = "-->   " .. title .. "    "

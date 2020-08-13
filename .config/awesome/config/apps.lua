@@ -10,6 +10,7 @@ return {
     shoot_sel = '~/.bin/shoot sel',
     run_on_start = {
         "setxkbmap -layout de",
+        "/usr/bin/feh --bg-fill $HOME/Pictures/wallpapers/wall.png",
         "systemctl --user restart picom", -- the current git version sometimes doesn't like an awesome restart
     },
 }

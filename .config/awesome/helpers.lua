@@ -5,11 +5,6 @@
 -- |_| |_|\___|_| .__/ \___|_|  |___/
 --              |_| 
 
--- Functions that you use more than once and in different files would
--- be nice to define here.
-
-
-
 local awful = require("awful")
 local gears = require("gears")
 local beautiful = require("beautiful")
@@ -20,7 +15,9 @@ local naughty = require("naughty")
 
 local helpers = {}
 
--- Create rounded rectangle shape (in one line)
+-- Shapes
+--
+
 helpers.rrect = function(radius)
     return function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, radius)
@@ -33,9 +30,12 @@ helpers.prrect = function(radius, tl, tr, br, bl)
     end
 end
 
+-- Text and font handling
+--
 function helpers.colorize_text(txt, fg)
     return "<span foreground='" .. fg .."'>" .. txt .. "</span>"
 end
+
 
 function helpers.client_menu_toggle()
     local instance = nil
@@ -61,6 +61,9 @@ function helpers.pango_escape(s)
     }))
 end
 
+-- Padding and margins
+--
+
 function helpers.vertical_pad(height)
     return wibox.widget{
         forced_height = height,
@@ -75,6 +78,15 @@ function helpers.horizontal_pad(width)
     }
 end
 
+function helpers.pad(size)
+    local str = ""
+    for i = 1, size do
+        str = str .. " "
+    end
+    local pad = wibox.widget.textbox(str)
+    return pad
+end
+
 -- Maximizes client and also respects gaps
 function helpers.maximize(c)
     c.maximized = not c.maximized
@@ -83,32 +95,6 @@ function helpers.maximize(c)
         
     end
     c:raise()
-end
-
-function helpers.move_to_edge(c, direction)
-    -- local workarea = awful.screen.focused().workarea
-    -- local client_geometry = c:geometry()
-    if direction == "up" then
-        local old_x = c:geometry().x
-        awful.placement.top(c, {honor_padding = true, honor_workarea = true, honor_padding = true})
-        c.x = old_x
-        -- c:geometry({ nil, y = workarea.y + beautiful.screen_margin * 2, nil, nil })
-    elseif direction == "down" then 
-        local old_x = c:geometry().x
-        awful.placement.bottom(c, {honor_padding = true, honor_workarea = true, honor_padding = true})
-        c.x = old_x
-        -- c:geometry({ nil, y = workarea.height + workarea.y - client_geometry.height - beautiful.screen_margin * 2 - beautiful.border_width * 2, nil, nil })
-    elseif direction == "left" then 
-        local old_y = c:geometry().y
-        awful.placement.left(c, {honor_padding = true, honor_workarea = true, honor_padding = true})
-        c.y = old_y
-        -- c:geometry({ x = workarea.x + beautiful.screen_margin * 2, nil, nil, nil })
-    elseif direction == "right" then 
-        local old_y = c:geometry().y
-        awful.placement.right(c, {honor_padding = true, honor_workarea = true, honor_padding = true})
-        c.y = old_y
-        -- c:geometry({ x = workarea.width + workarea.x - client_geometry.width - beautiful.screen_margin * 2 - beautiful.border_width * 2, nil, nil, nil })
-    end
 end
 
 local double_tap_timer = nil
@@ -130,23 +116,6 @@ function helpers.single_double_tap(single_tap_function, double_tap_function)
             end
             return false
         end)
-end
-
-
--- Used as a custom command in rofi to move a window into the current tag
--- instead of following it.
--- Rofi has access to the X window id of the client.
-function helpers.rofi_move_client_here(window)
-    local win = function (c)
-        return awful.rules.match(c, {window = window})
-    end
-
-    for c in awful.client.iterate(win) do
-        c.minimized = false
-        c:move_to_tag(mouse.screen.selected_tag)
-        client.focus = c
-        c:raise()
-    end
 end
 
 -- Add a hover cursor to a widget by changing the cursor on
@@ -171,6 +140,57 @@ function helpers.add_hover_cursor(w, hover_cursor)
             w.cursor = original_cursor
         end
     end)
+end
+
+-- Helper function that creates buttons given a text symbol, color, hover_color
+-- and the command to run on click.
+function helpers.create_button(symbol, color, hover_color, cmd, args)
+    args = args or {}
+
+    local icon = wibox.widget {
+        markup = helpers.colorize_text(symbol, color),
+        align = "center",
+        valign = "center",
+        font = "icomoon 50",
+        forced_width = args.forced_width or dpi(180),
+        forced_height = args.forced_width or dpi(200),
+        widget = wibox.widget.textbox
+    }
+
+    -- Press "animation"
+    icon:connect_signal("button::press", function(_, _, __, button)
+        if button == 3 then
+            icon.markup = helpers.colorize_text(symbol, hover_color.."55")
+        end
+    end)
+    icon:connect_signal("button::release", function ()
+        icon.markup = helpers.colorize_text(symbol, hover_color)
+    end)
+
+    -- Hover "animation"
+    icon:connect_signal("mouse::enter", function ()
+        icon.markup = helpers.colorize_text(symbol, hover_color)
+    end)
+    icon:connect_signal("mouse::leave", function ()
+        icon.markup = helpers.colorize_text(symbol, color)
+    end)
+
+    -- Change cursor on hover
+    helpers.add_hover_cursor(icon, "hand1")
+
+    -- Adds mousebinds if cmd is provided
+    if cmd then
+        icon:buttons(gears.table.join(
+            awful.button({ }, 1, function ()
+                cmd()
+            end),
+            awful.button({ }, 3, function ()
+                cmd()
+            end)
+        ))
+    end
+
+    return icon
 end
 
 -- Tag back and forth:
@@ -202,7 +222,6 @@ function helpers.tag_back_and_forth(tag_index)
         end
     end
 end
-
 
 -- Resize DWIM (Do What I Mean)
 -- Resize client or factor
@@ -318,58 +337,6 @@ function helpers.volume_control(step)
     awful.spawn.with_shell(cmd)
 end
 
--- TODO: notification action buttons
--- https://github.com/awesomeWM/awesome/issues/3017
-local capture_notif = nil
-function helpers.screenshot(action, delay)
-    local cmd
-    local timestamp = os.date("%Y.%m.%d-%H.%M.%S")
-    local filename = user.screenshot_dir..timestamp..".screenshot.png"
-    -- local filename = user.screenshot_dir.."screenshot"..timestamp..".png"
-    local maim_args = "-u -b 3 -m 5"
-    local icon = icons.screenshot
-
-    local prefix
-    if delay then
-        prefix = "sleep "..tostring(delay).." && "
-    else
-        prefix = ""
-    end
-
-    if action == "full" then
-        cmd = prefix.."maim "..maim_args.." "..filename
-        awful.spawn.easy_async_with_shell(cmd, function()
-            naughty.notification({ title = "Screenshot", message = "Screenshot taken", icon = icon })
-        end)
-    elseif action == "selection" then
-        cmd = "maim "..maim_args.." -s "..filename
-        capture_notif = naughty.notification({ title = "Screenshot", message = "Select area to capture.", icon = icon, timeout = 1 })
-        awful.spawn.easy_async_with_shell(cmd, function(_, __, ___, exit_code)
-            if exit_code == 0 then
-                capture_notif = notifications.notify_dwim({ title = "Screenshot", message = "Selection captured", icon = icon }, capture_notif)
-            else
-                naughty.destroy(capture_notif)
-            end
-        end)
-    elseif action == "clipboard" then
-        capture_notif = naughty.notification({ title = "Screenshot", message = "Select area to copy to clipboard", icon = icon })
-        cmd = "maim "..maim_args.." -s /tmp/maim_clipboard && xclip -selection clipboard -t image/png /tmp/maim_clipboard &>/dev/null && rm /tmp/maim_clipboard"
-        awful.spawn.easy_async_with_shell(cmd, function(_, __, ___, exit_code)
-            if exit_code == 0 then
-                capture_notif = notifications.notify_dwim({ title = "Screenshot", message = "Copied selection to clipboard", icon = icon }, capture_notif)
-            else
-                naughty.destroy(capture_notif)
-            end
-        end)
-    elseif action == "browse" then
-        awful.spawn.with_shell("cd "..user.screenshot_dir.." && feh $(ls -t)")
-    elseif action == "gimp" then
-        awful.spawn.with_shell("cd "..user.screenshot_dir.." && gimp $(ls -t | head -n1)")
-        naughty.notification({ message = "Opening last screenshot with GIMP", icon = icon })
-    end
-
-end
-
 function helpers.fake_escape()
     root.fake_input('key_press', "Escape")
     root.fake_input('key_release', "Escape")
@@ -438,15 +405,6 @@ function helpers.float_and_resize(c, width, height)
     awful.client.property.set(c, 'floating_geometry', c:geometry())
     c.floating = true
     c:raise()
-end
-
-function helpers.pad(size)
-    local str = ""
-    for i = 1, size do
-        str = str .. " "
-    end
-    local pad = wibox.widget.textbox(str)
-    return pad
 end
 
 return helpers

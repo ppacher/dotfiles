@@ -16,7 +16,7 @@ icons.init(icon_theme)
 -- Sidebar attributes
 sidebar_hide_on_mouse_leave = true
 sidebar_show_on_mouse_screen_edge = true
-sidebar = wibox ({visible = true , ontop = false , type = "sidebar" })
+sidebar = wibox ({visible = true , ontop = false , type = "dock" })
 sidebar.bg = beautiful.sidebar_bg or beautiful.xbackground .. 'df'
 sidebar.fg = beautiful.sidebar_fg or beautiful.xforeground
 sidebar.opacity = 1
