@@ -18,36 +18,68 @@ UXTerm*cursorColor: #f9929b
 URxvt*borderColor:  [100]#30333d
 
 ! Colors 0-15.
+
+! black/darkgrey
 *.color0: #292b34
 *color0:  #292b34
+
+! red
 *.color1: #f9929b
 *color1:  #f9929b
+
+! green
 *.color2: #7ed491
 *color2:  #7ed491
+
+! yellow
 *.color3: #fbdf90
 *color3:  #fbdf90
+
+! blue
 *.color4: #a3b8ef
 *color4:  #a3b8ef
+
+! purple
 *.color5: #ccaced
 *color5:  #ccaced
+
+! green
 *.color6: #9ce5c0
 *color6:  #9ce5c0
+
+! white
 *.color7: #dfd7d7
 *color7:  #dfd7d7
+
+! teal
 *.color8: #585e74
 *color8:  #585e74
+
+! red
 *.color9: #f9929b
 *color9:  #f9929b
+
+! green
 *.color10: #7ed491
 *color10:  #7ed491
+
+! yellow
 *.color11: #fbdf90
 *color11:  #fbdf90
+
+! blue
 *.color12: #74c3e4
 *color12:  #74c3e4
+
+! purple
 *.color13: #ccaced
 *color13:  #ccaced
+
+! green
 *.color14: #9ce5c0
 *color14:  #9ce5c0
+
+! white
 *.color15: #dfd7d7
 *color15:  #dfd7d7
 

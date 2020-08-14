@@ -33,7 +33,7 @@ end
 -- Text and font handling
 --
 function helpers.colorize_text(txt, fg)
-    return "<span foreground='" .. fg .."'>" .. txt .. "</span>"
+    return "<span foreground='" .. fg .."'>" .. (txt or "") .. "</span>"
 end
 
 

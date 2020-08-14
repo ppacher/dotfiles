@@ -56,25 +56,6 @@ theme.fg_focus      = theme.xcolor4
 theme.fg_urgent     = theme.xcolor3
 theme.fg_minimize   = theme.xcolor8
 
--- Pretty color names
-theme.system_black_dark = '#3D4C5F'
-theme.system_black_light = '#56687E'
-theme.system_red_dark = '#EE4F84'
-theme.system_red_light = '#F48FB1'
-theme.system_green_dark = '#53E2AE'
-theme.system_green_light = '#A1EFD3'
-theme.system_yellow_dark = '#F1FF52'
-theme.system_yellow_light = '#F1FA8C'
-theme.system_blue_dark = '#6498EF' 
-theme.system_blue_light = '#92B6F4'
-theme.system_magenta_dark = '#985EFF'
-theme.system_magenta_light = '#BD99FF'
-theme.system_cyan_dark = '#24D1E7'
-theme.system_cyan_light = '#26c6da' 
-theme.system_white_dark = '#E5E5E5'
-theme.system_white_light = '#F8F8F2'
-
-
 -- Borders
 theme.border_width  = dpi(1)
 -- theme.border_color = theme.xcolor0
@@ -159,18 +140,17 @@ theme.titlebar_fg_normal = theme.xcolor4
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
-theme.notification_position = "top_left" 
+theme.notification_position = "top_right" 
 theme.notification_border_color = theme.xbackground .. 'cf'
+theme.notification_border_radius = theme.border_radius
 theme.notification_bg = theme.xbackground .. 'cf'
 theme.notification_fg = theme.xforeground
 theme.notification_icon_size = dpi(60)
---theme.notification_height = dpi(80)
---theme.notification_width = dpi(300)
-theme.notification_margin = dpi(10)
+theme.notification_margin = dpi(20)
 theme.notification_opacity = 1
-theme.notification_font = theme.font
+theme.notification_font = 'DejaVu Sans Light 12'
 theme.notification_padding = dpi(6)
-theme.notification_spacing = dpi(6)
+theme.notification_spacing = dpi(16)
 
 -- Edge snap
 theme.snap_bg = theme.xcolor4

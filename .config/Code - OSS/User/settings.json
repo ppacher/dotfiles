@@ -1,11 +1,11 @@
 {
     "go.formatTool": "goimports",
-    "editor.fontFamily": "Consolas Ligaturized",
+    "editor.fontFamily": "Consolas Ligaturized, Font Awesome",
     "editor.fontSize": 13,
     "editor.fontLigatures": true,
     "editor.scrollBeyondLastLine": false,
     "vscode-neovim.neovimPath": "/usr/bin/nvim",
     "window.menuBarVisibility": "toggle",
-    "workbench.colorTheme": "Atom One Dark",
+    "workbench.colorTheme": "Xresources",
     "explorer.confirmDelete": false
 }
