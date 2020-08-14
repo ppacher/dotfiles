@@ -11,7 +11,6 @@ require("awful.autofocus")
 -- Theme {{{
 -- ------------------------------------
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
-print("config: theme loaded")
 
 -- }}}
 
@@ -49,7 +48,8 @@ require('config.layouts')
 
 _G.root.keys(require('config.keys.global'))
 
-print("config: client keys and layout config")
+-- Notification rules
+
 -- }}}
 
 -- Modules {{{
@@ -58,8 +58,9 @@ require("modules.layout-switcher")
 require("modules.autostart")
 require("modules.exitscreen")
 require("modules.backdrop")
-require("modules.notifications")
--- }}}
+
+local notifs = require("notifications")
+notifs.init()
 
 -- Layout {{{
 -- ------------------------------------
@@ -80,58 +81,23 @@ require("awful.hotkeys_popup.keys")
 
 local helpers = require("helpers")
 
-
--- Listeners
---require("ears")
-
---[[
--- local bar = require("widgets.statusbar")
--- This is used later as the default terminal and editor to run.
-terminal = "kitty"
-editor = os.getenv("EDITOR") or "nvim"
-editor_cmd = terminal .. " -e " .. editor
-browser = "firefox"
-filemanager= "thunar"
-
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
-altkey = "Mod1"
-shift = "Shift"
-ctrl = "Control"
--- Table of layouts to cover with awful.layout.inc, order matters.
-
-
--- }}}
-
-icons = require("icons")
-icons.init("sheet")
-
---]]
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 local myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   --{ "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", function() awesome.quit() end },
 }
-local mymainmenu = awful.menu({ items = {
 
- { "Terminal Emulator", terminal },
- { "Web Browser", browser },
- { "File Manager", filemanager} ,
- { "Search " , "rofia "} ,
- { "awesome", myawesomemenu }
-                                  }
-                        })
-
-local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
+local mymainmenu = awful.menu {
+    items = {
+        { "Terminal Emulator", terminal },
+        { "Web Browser", browser },
+        { "File Manager", filemanager} ,
+        { "Search " , "rofia "} ,
+        { "awesome", myawesomemenu },
+    },
+}
 
 -- Keyboard map indicator and switcher
 
@@ -309,6 +275,5 @@ _G.client.connect_signal(
         c.border_color = beautiful.border_normal
     end
 )
-
 
 _G.root.keys(require('config.keys.global'))

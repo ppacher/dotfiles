@@ -35,15 +35,15 @@ else
 end
 
 sidebar:buttons(gears.table.join(
--- Middle click - Hide sidebar
-awful.button({ }, 2, function ()
-    sidebar.visible = false
-end)
--- Right click - Hide sidebar
--- awful.button({ }, 3, function ()
---     sidebar.visible = false
---     -- mymainmenu:show()
--- end)
+    -- Middle click - Hide sidebar
+    awful.button({ }, 2, function ()
+        sidebar.visible = false
+    end)
+    -- Right click - Hide sidebar
+    -- awful.button({ }, 3, function ()
+    --     sidebar.visible = false
+    --     -- mymainmenu:show()
+    -- end)
 ))
 
 sidebar:connect_signal("mouse::leave", function ()
@@ -72,99 +72,6 @@ sidebar_activator:buttons(
             awful.tag.viewnext()
         end)
 ))
-
-
--- Helper function that changes the appearance of progress bars and their icons
--- Create horizontal rounded bars
-local function format_progress_bar(bar, icon)
-    icon.forced_height = dpi(36)
-    icon.forced_width = dpi(36)
-    icon.resize = true
-    bar.forced_width = dpi(215)
-    bar.shape = gears.shape.rounded_bar
-    bar.bar_shape = gears.shape.rounded_bar
-
-    -- bar.forced_height = dpi(30)
-    -- bar.paddings = dpi(4)
-    -- bar.border_width = dpi(2)
-    -- bar.border_color = x.color8
-
-    local w = wibox.widget{
-        nil,
-        {
-            icon,
-            bar,
-            spacing = dpi(10),
-            layout = wibox.layout.fixed.horizontal
-        },
-        expand = "none",
-        layout = wibox.layout.align.horizontal
-    }
-    return w
-end
-
-
---- {{{ Volume Widget
-
-local volume_icon = wibox.widget.imagebox(icons.volume)
-
-awesome.connect_signal("ears::volume", function(volume, muted)
-    if muted then
-        volume_icon.image = icons.muted
-    else
-        volume_icon.image = icons.volume
-    end
-end)
-
-local volume_bar = require("widgets.volume_bar")
-local volume = format_progress_bar(volume_bar, volume_icon)
-
-apps_volume = function ()
-    helpers.run_or_raise({class = 'Pavucontrol'}, true, "pavucontrol")
-end
-
-volume:buttons(gears.table.join(
-    -- Left click - Mute / Unmute
-    awful.button({ }, 1, function ()
-        helpers.volume_control(0)
-    end),
-       -- Scroll - Increase / Decrease volume
-    awful.button({ }, 4, function ()
-        helpers.volume_control(5)
-    end),
-    awful.button({ }, 5, function ()
-        helpers.volume_control(-5)
-    end)
-))
-
---- }}}
-
-
---- {{{ Brightness Widget
-
-local brightness_icon = wibox.widget.imagebox(icons.brightness)
-local brightness_bar = require("widgets.brightness_bar")
-local brightness = format_progress_bar(brightness_bar, brightness_icon)
-
---- }}}
-
-
---- {{{ Ram Widget
-
-local ram_icon = wibox.widget.imagebox(icons.ram)
-local ram_bar = require("widgets.ram_bar")
-local ram = format_progress_bar(ram_bar, ram_icon)
-
---- }}}
-
-
---- {{{ Cpu Widget
-
-local cpu_icon = wibox.widget.imagebox(icons.cpu)
-local cpu_bar = require("widgets.cpu_bar")
-local cpu = format_progress_bar(cpu_bar, cpu_icon)
-
---- }}}
 
 
 --- {{{ Clock
@@ -214,14 +121,6 @@ local fancy_date = {
 ---}}}
 
 
-
-local mpd = require("widgets.mpd")
-local mpd_area = wibox.layout.align.vertical()
-mpd_area:set_top(nil)
-mpd_area:set_middle(wibox.container.margin(mpd, dpi(14), dpi(10), 0, 0))
-mpd_area:set_bottom(nil)
-
-
 sidebar:setup {
     { ----------- TOP GROUP -----------
         fancy_time,
@@ -234,13 +133,6 @@ sidebar:setup {
     { ----------- MIDDLE GROUP -----------
         fancy_date,
         helpers.vertical_pad(30),
-        volume,
-        brightness,
-        helpers.vertical_pad(40),
-        cpu,
-        ram,
-        helpers.vertical_pad(40),
-        mpd_area,
         layout = wibox.layout.fixed.vertical
     },
         layout = wibox.layout.align.vertical,

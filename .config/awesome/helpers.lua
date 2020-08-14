@@ -142,55 +142,54 @@ function helpers.add_hover_cursor(w, hover_cursor)
     end)
 end
 
--- Helper function that creates buttons given a text symbol, color, hover_color
--- and the command to run on click.
-function helpers.create_button(symbol, color, hover_color, cmd, args)
-    args = args or {}
 
-    local icon = wibox.widget {
-        markup = helpers.colorize_text(symbol, color),
-        align = "center",
-        valign = "center",
-        font = "icomoon 50",
-        forced_width = args.forced_width or dpi(180),
-        forced_height = args.forced_width or dpi(200),
-        widget = wibox.widget.textbox
+local function rounded_bar(color)
+    return wibox.widget {
+        max_value     = 100,
+        value         = 0,
+        forced_height = dpi(10),
+        forced_width  = dpi(60),
+        margins       = {
+          top = dpi(10),
+          bottom = dpi(10),
+        },
+        shape         = gears.shape.rounded_bar,
+        border_width  = 0,
+        color         = color,
+        background_color = beautiful.xbackground,
+        border_color  = beautiful.xbackground,
+        widget        = wibox.widget.progressbar,
     }
+end
 
-    -- Press "animation"
-    icon:connect_signal("button::press", function(_, _, __, button)
-        if button == 3 then
-            icon.markup = helpers.colorize_text(symbol, hover_color.."55")
-        end
-    end)
-    icon:connect_signal("button::release", function ()
-        icon.markup = helpers.colorize_text(symbol, hover_color)
-    end)
 
-    -- Hover "animation"
-    icon:connect_signal("mouse::enter", function ()
-        icon.markup = helpers.colorize_text(symbol, hover_color)
-    end)
-    icon:connect_signal("mouse::leave", function ()
-        icon.markup = helpers.colorize_text(symbol, color)
-    end)
+-- Helper function that changes the appearance of progress bars and their icons
+-- Create horizontal rounded bars
+local function format_progress_bar(bar, icon)
+    icon.forced_height = dpi(27)
+    icon.forced_width = dpi(36)
+    icon.resize = true
+    bar.forced_width = dpi(100)
+    bar.shape = gears.shape.rounded_bar
+    bar.bar_shape = gears.shape.rounded_bar
 
-    -- Change cursor on hover
-    helpers.add_hover_cursor(icon, "hand1")
+    -- bar.forced_height = dpi(30)
+    -- bar.paddings = dpi(4)
+    -- bar.border_width = dpi(2)
+    -- bar.border_color = x.color8
 
-    -- Adds mousebinds if cmd is provided
-    if cmd then
-        icon:buttons(gears.table.join(
-            awful.button({ }, 1, function ()
-                cmd()
-            end),
-            awful.button({ }, 3, function ()
-                cmd()
-            end)
-        ))
-    end
-
-    return icon
+    local w = wibox.widget{
+        nil,
+        {
+            icon,
+            bar,
+            spacing = dpi(5),
+            layout = wibox.layout.fixed.horizontal
+        },
+        expand = "none",
+        layout = wibox.layout.align.horizontal
+    }
+    return w
 end
 
 -- Tag back and forth:

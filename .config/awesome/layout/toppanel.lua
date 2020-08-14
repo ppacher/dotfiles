@@ -17,73 +17,6 @@ local modkey = require("config.keys.mod").modKey
 
 local systray_margin = (beautiful.wibar_height-beautiful.systray_icon_size)/2
 
-local function rounded_bar(color)
-    return wibox.widget {
-        max_value     = 100,
-        value         = 0,
-        forced_height = dpi(10),
-        forced_width  = dpi(60),
-        margins       = {
-          top = dpi(10),
-          bottom = dpi(10),
-        },
-        shape         = gears.shape.rounded_bar,
-        border_width  = 0,
-        color         = color,
-        background_color = beautiful.xbackground,
-        border_color  = beautiful.xbackground,
-        widget        = wibox.widget.progressbar,
-    }
-end
-
-
--- Helper function that changes the appearance of progress bars and their icons
--- Create horizontal rounded bars
-local function format_progress_bar(bar, icon)
-    icon.forced_height = dpi(27)
-    icon.forced_width = dpi(36)
-    icon.resize = true
-    bar.forced_width = dpi(100)
-    bar.shape = gears.shape.rounded_bar
-    bar.bar_shape = gears.shape.rounded_bar
-
-    -- bar.forced_height = dpi(30)
-    -- bar.paddings = dpi(4)
-    -- bar.border_width = dpi(2)
-    -- bar.border_color = x.color8
-
-    local w = wibox.widget{
-        nil,
-        {
-            icon,
-            bar,
-            spacing = dpi(5),
-            layout = wibox.layout.fixed.horizontal
-        },
-        expand = "none",
-        layout = wibox.layout.align.horizontal
-    }
-    return w
-end
-
-
--- {{{ Battery Bar Widget
-
-local battery_icon = wibox.widget.imagebox(icons.battery)
-
-_G.awesome.connect_signal("ears::charger", function(plugged)
-    if plugged then
-        battery_icon.image = icons.battery_charging
-    else
-        battery_icon.image = icons.battery
-    end
-end)
-
-local battery_bar = require("widgets.battery_bar")
-local battery = format_progress_bar(battery_bar, battery_icon)
-
---- }}}
-
 
 --- {{{ Systray Widget
 
@@ -211,8 +144,6 @@ awful.screen.connect_for_each_screen(function(s)
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
                 spacing = beautiful.wibar_spacing,
-                --ram_bar,
-                battery,
                 mysystray_container
             },
             left = beautiful.wibar_margin,

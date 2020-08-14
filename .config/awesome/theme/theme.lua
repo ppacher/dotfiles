@@ -6,17 +6,18 @@
                                
 
 
-local theme_assets = require("beautiful.theme_assets")
-local xresources = require("beautiful.xresources")
-local dpi = xresources.apply_dpi
-local xrdb = xresources.get_current_theme()
-local gears = require("gears")
-local gfs = require("gears.filesystem")
-local themes_path = gfs.get_themes_dir()
-local helpers = require("helpers")
+local theme_assets  = require("beautiful.theme_assets")
+local xresources    = require("beautiful.xresources")
+local gears         = require("gears")
+local gfs           = require("gears.filesystem")
+local helpers       = require("helpers")
+local dpi           = xresources.apply_dpi
+local xrdb          = xresources.get_current_theme()
+local themes_path   = gfs.get_themes_dir()
 
 -- Inherit default theme
 local theme = dofile(themes_path.."default/theme.lua")
+
 -- Titlebar icon path
 local tip = "~/.config/awesome/theme/icons/titlebar/"
 --theme.wallpaper = gears.filesystem.get_configuration_dir() .. "theme/wall.png"
@@ -43,7 +44,8 @@ theme.xcolor14 =     xrdb.color14     or  "#7dbba8"
 theme.xcolor15 =     xrdb.color15     or  "#d1d5dc" 
 theme.font          = "Iosevka Extended 10"
 theme.font_bold     = "awesomewm-font 10" -- "Iosevka Extended 11"
-theme.font1 	    = "Font Awesome 5 Free 8"
+theme.font_awesome  = "Font Awesome 5 Free"
+theme.icon_font     = theme.font_awesome
 theme.bg_dark       = theme.xcolor0
 theme.bg_normal     = theme.xbackground
 theme.bg_focus      = theme.xcolor8
@@ -170,7 +172,7 @@ theme.tooltip_opacity = 1
 theme.tooltip_align = "left"
 
 -- Menu
-theme.menu_font = "Iosevka Extended 8"
+theme.menu_font = "Iosevka Extended 10"
 theme.menu_bg_focus = theme.xcolor4
 theme.menu_fg_focus = theme.xcolor7
 theme.menu_bg_normal = theme.xbackground

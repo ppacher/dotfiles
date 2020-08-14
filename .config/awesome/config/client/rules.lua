@@ -43,7 +43,7 @@ ruled.client.connect_signal('request::rules', function()
         placement = awful.placement.centered,
         ontop = true,
         floating = true,
-        drawBackdrop = true,
+        draw_backdrop = true,
         shape = function()
           return function(cr, w, h)
             gears.shape.rounded_rect(cr, w, h, 8)

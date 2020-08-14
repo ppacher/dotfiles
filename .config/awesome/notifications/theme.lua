@@ -36,7 +36,11 @@ naughty.config.icon_formats = {	"png", "svg", "jpg", "gif" }
 ruled.notification.connect_signal('request::rules', function()	
 	-- Critical notifs
 	ruled.notification.append_rule {
-		rule 	  = { urgency = 'critical', app_icon = nil },
+		rule 	  = {
+            urgency = 'critical',
+            app_icon = nil,
+            icon_text = nil
+        },
 		properties = {
             icon_text = "",
 		}
@@ -52,7 +56,11 @@ ruled.notification.connect_signal('request::rules', function()
 
     -- Normal notifs
     ruled.notification.append_rule {
-        rule       = { urgency = 'normal', app_icon = nil },
+        rule       = {
+            urgency = 'normal',
+            app_icon = nil,
+            icon_text = nil
+        },
         properties = {
             icon_text = ""
         }
@@ -67,7 +75,11 @@ ruled.notification.connect_signal('request::rules', function()
 
     -- Low notifs
     ruled.notification.append_rule {
-        rule       = { urgency = 'low', app_icon = nil },
+        rule       = {
+            urgency = 'low',
+            app_icon = nil,
+            icon_text = nil
+        },
         properties = {
             icon_text = ""
         }
@@ -79,17 +91,6 @@ ruled.notification.connect_signal('request::rules', function()
 			fg = beautiful.xcolor2,
 		}
 	}
-end)
-
--- Error handling
-naughty.connect_signal("request::display_error", function(message, startup)
-    naughty.notification {
-        urgency = "critical",
-        title   = "Oops, an error happened"..(startup and " during startup!" or "!"),
-        message = message,
-        app_name = 'System Notification',
-        icon = beautiful.awesome_icon
-    }
 end)
 
 -- XDG icon lookup
@@ -104,9 +105,15 @@ naughty.connect_signal("request::icon", function(n, context, hints)
     end
 end)
 
+naughty.connect_signal("request::action_icon", function(a, context, hints)
+    a.icon = menubar.utils.lookup_icon(hints.id)
+end)
+
 -- Naughty template
 naughty.connect_signal("request::display", function(n)
     local icon_widget = naughty.widget.icon
+
+    print("[notify] " .. (n.app_name or "<no-name>"))
     
 	-- if the notification has a icon_text property
 	-- we are going to use that instead of the icon.
