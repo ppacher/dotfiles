@@ -108,7 +108,8 @@ local lock = create_button(lock_text_icon, beautiful.xcolor5, "Lock", lock_comma
 -- Greeter and profile message boxes.
 local greeter_message = wibox.widget { 
     markup = "Choose wisely!",
-    font = "Inter UltraLight 48",
+    --font = "Inter UltraLight 48",
+    font = "Marigolds 88",
     align = "center",
     valign = "center",
     widget = wibox.widget.textbox
@@ -131,7 +132,6 @@ _G.screen.connect_signal(
             x = s.geometry.x,
             y = s.geometry.y,
         }
-        print("[module:exit_screen] created per-screen wibox")
 
         local function exit_screen_hide()
             _G.awesome.emit_signal('module::exit_screen_hide')
@@ -165,12 +165,15 @@ _G.screen.connect_signal(
             function()
                 print("[module:exit_screen] signal module::exit_screen_show received")
                 for s in _G.screen do
-                    s.exit_screen.visible = false
+                    s.exit_screen.visible = true
+                    s.exit_screen:get_children_by_id("content")[1]:set_visible(false)
                 end
                 awful.screen.focused().exit_screen.visible = true
+                awful.screen.focused().exit_screen:get_children_by_id("content")[1]:set_visible(true)
                 exit_screen_grabber:start()
             end
         )
+
         _G.awesome.connect_signal(
             'module::exit_screen_hide',
             function()
@@ -181,6 +184,15 @@ _G.screen.connect_signal(
                 end
             end
         )
+
+        -- follow mouse and show the buttons only on the active
+        -- screen
+        s.exit_screen:connect_signal("mouse::enter", function() 
+            for s in _G.screen do
+                s.exit_screen:get_children_by_id("content")[1]:set_visible(false)
+            end
+            awful.screen.focused().exit_screen:get_children_by_id("content")[1]:set_visible(true)
+        end)
 
         s.exit_screen : buttons(gears.table.join(
             -- Left click - Hide exit_screen
@@ -197,24 +209,27 @@ _G.screen.connect_signal(
             end)
         ))
 
+
+
         s.exit_screen : setup {
             nil,
              {
                  nil,
                  {
-                     greeter_message,
-                     {
-                         poweroff,
-                         reboot,
-                         suspend,
-                         exit,
-                         lock,
-                         spacing = dpi(50),
-                         layout = wibox.layout.fixed.horizontal
-                     },
-                     nil,
-                     spacing = dpi(40),
-                     layout = wibox.layout.fixed.vertical,
+                    greeter_message,
+                    {
+                        poweroff,
+                        reboot,
+                        suspend,
+                        exit,
+                        lock,
+                        spacing = dpi(50),
+                        layout = wibox.layout.fixed.horizontal
+                    },
+                    nil,
+                    id = "content",
+                    spacing = dpi(40),
+                    layout = wibox.layout.fixed.vertical,
                  },
                  nil,
                  expand = "none",
