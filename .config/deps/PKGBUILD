@@ -28,6 +28,12 @@ depends=(
   'notify-send.sh'
 
   #
+  # HTPC mode
+  #
+  'snapcast'
+  'librespot'
+
+  #
   # Tools in .bin
   #
   'giph'

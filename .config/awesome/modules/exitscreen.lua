@@ -114,8 +114,6 @@ local greeter_message = wibox.widget {
     widget = wibox.widget.textbox
 }
 
-
-
 local function exit_screen_hide()
     _G.awesome.emit_signal('module::exit_screen_hide')
 end

@@ -171,7 +171,7 @@ local globalKeys = gears.table.join(
 
     -- Utilities
     --
-    awful.key({
+    awful.key(
         { modkey },
         'Print',
         function()
@@ -179,20 +179,20 @@ local globalKeys = gears.table.join(
             awful.spawn.with_shell(apps.shoot_sel)
         end,
         {description = 'take a screenshot', group = 'utils'}
-    }),
-    awful.key({
+    ),
+    awful.key(
         {'Shift'},
         'Print',
         function()
             awful.spawn.with_shell(apps.shoot)
         end,
         {description = 'take a screenshot', group = 'utils'}
-    }),
+    ),
 
     -- Exit Screen
     awful.key(
-        {},
-        'XF86HomePage',
+        { modkey },
+        'Escape',
         function()
             _G.awesome.emit_signal('module::exit_screen_show')
         end,

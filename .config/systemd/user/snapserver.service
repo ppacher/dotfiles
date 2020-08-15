@@ -1,0 +1,13 @@
+[Unit]
+Description=Snapcast Server
+After=network.target
+
+[Service]
+Restart=always
+RestartSec=10
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -m 0755 -p /home/${USER}/.cache/snapcast 
+ExecStart=/usr/bin/snapserver --config /home/${USER}/.config/snapcast/server.conf
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,18 @@
+[Unit]
+Description=Spotify Connect
+After=network.target
+
+[Service]
+Restart=always
+RestartSec=10
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -m 0755 -p /home/${USER}/.cache/librespot 
+Environment="DEVICE_NAME=Wohnzimmer (%H)"
+Environment="BITRATE=160"
+Environment="CACHE_ARGS=--disable-audio-cache"
+Environment="VOLUME_ARGS=--enable-volume-normalisation --linear-volume --initial-volume=100"
+Environment="BACKEND_ARGS=--backend pulseaudio"
+ExecStart=/usr/bin/librespot --name ${DEVICE_NAME} $BACKEND_ARGS --bitrate ${BITRATE} $CACHE_ARGS $VOLUME_ARGS $OPTIONS
+
+[Install]
+WantedBy=default.target

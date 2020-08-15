@@ -1,0 +1,12 @@
+[Unit]
+Description=Snapcast Client
+After=network.target
+
+[Service]
+Restart=always
+RestartSec=10
+PermissionsStartOnly=true
+ExecStart=/usr/bin/snapclient -h localhost
+
+[Install]
+WantedBy=default.target

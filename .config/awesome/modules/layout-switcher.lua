@@ -4,10 +4,10 @@ local wibox     = require("wibox")
 local beautiful = require("beautiful")
 local dpi       = require("beautiful.xresources").apply_dpi
 local helpers   = require("helpers")
-local modkey      = require("config.keys.mod").modKey
+local modkey    = require("config.keys.mod").modKey
 
 local ll = awful.widget.layoutlist {
-    source      = awful.widget.layoutlist.source.default_layouts, --DOC_HIDE
+    source      = awful.widget.layoutlist.source.default_layouts, 
     spacing     = dpi(24),
     base_layout = wibox.widget {
         spacing         = dpi(24),
