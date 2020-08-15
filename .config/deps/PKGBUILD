@@ -9,12 +9,13 @@ license=('GPL')
 groups=()
 depends=(
   #
-  # Window Managment and Composition
+  # Window Managment and Composition and widgets
   #
   'awesome-git'
   'feh'
   'picom-tryone-git'
   'rofi-git'
+  'playerctl'
 
   #
   # Apps

@@ -6,8 +6,6 @@
 
 -- Most of these icons I stole from flaticon
 
-
-
 local gears = require("gears")
 
 local function file_exists(path)

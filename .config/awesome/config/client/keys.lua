@@ -1,12 +1,25 @@
-local awful = require('awful')
-local gears = require('gears')
+local awful   = require('awful')
+local gears   = require('gears')
+local helpers = require('helpers')
+local keys    = require('config.keys.mod')
+local modkey  = keys.modKey
+local altkey  = keys.altKey
+local ctrl    = 'Control'
+local dpi     = require('beautiful').xresources.apply_dpi
 
-local keys = require('config.keys.mod')
-local modkey = keys.modKey
-local altkey = keys.altKey
-local ctrl = 'Control'
+local function screen_width(c)
+    if not c then
+        return awful.screen.focused().geometry.width
+    end
+    return c.screen.geometry.width
+end
 
-local dpi = require('beautiful').xresources.apply_dpi
+local function screen_height(c)
+    if not c then
+        return awful.screen.focused().geometry.height
+    end
+    return c.screen.geometry.height
+end
 
 local clientKeys = gears.table.join(
     -- toggle fullscreen
@@ -27,19 +40,24 @@ local clientKeys = gears.table.join(
         function(c)
             c.fullscreen = false
             c.maximized = false
-            c.floating = not c.floating
-
-            -- if the client is now floating place it
-            -- in the middle of the screen
             if c.floating then
-                awful.placement.centered(c, {
-                    honor_workarea = true
-                }) 
+                c.floating = false
+                return
             end
 
-            c:raise()
+            helpers.float_and_resize(c, screen_width(c) * 0.45, screen_height(c) * 0.5)
         end,
         { description = "Toggle floating", group = 'Client' }
+    ),
+
+    -- toggle ontop
+    awful.key(
+        {modkey},
+        't',
+        function(c)
+            c.ontop = not c.ontop
+        end,
+        { description = "Toggle ontop", group = 'Client' }
     ),
 
     -- terminate client
@@ -73,16 +91,91 @@ local clientKeys = gears.table.join(
         { description = "Go back", group = 'Client'}
     ),
 
+    -- Moving windows, do what I mean
+    awful.key(
+        {modkey, 'Shift'},
+        'Down',
+        function(c)
+            helpers.move_client_dwim(c, 'down')
+        end,
+        { description = "Move client down", group = 'Client'}
+    ),
+    awful.key(
+        {modkey, 'Shift'},
+        'Up',
+        function(c)
+            helpers.move_client_dwim(c, 'up')
+        end,
+        { description = "Move client up", group = 'Client'}
+    ),
+    awful.key(
+        {modkey, 'Shift'},
+        'Left',
+        function(c)
+            helpers.move_client_dwim(c, 'left')
+        end,
+        { description = "Move client left", group = 'Client'}
+    ),
+    awful.key(
+        {modkey, 'Shift'},
+        'Right',
+        function(c)
+            helpers.move_client_dwim(c, 'right')
+        end,
+        { description = "Move client right", group = 'Client'}
+    ),
+
+    -- Resizing windows, do what I mean
+    awful.key(
+        {modkey, ctrl},
+        'Up',
+        function(c)
+            helpers.resize_dwim(c, 'up')
+        end,
+        { description = 'Resize client up', group = 'Client'}
+    ),    
+    awful.key(
+        {modkey, ctrl},
+        'Down',
+        function(c)
+            helpers.resize_dwim(c, 'down')
+        end,
+        { description = 'Resize client down', group = 'Client'}
+    ),
+    awful.key(
+        {modkey, ctrl},
+        'Left',
+        function(c)
+            helpers.resize_dwim(c, 'left')
+        end,
+        { description = 'Resize client left', group = 'Client'}
+    ),
+    awful.key(
+        {modkey, ctrl},
+        'Right',
+        function(c)
+            helpers.resize_dwim(c, 'right')
+        end,
+        { description = 'Resize client right', group = 'Client'}
+    ),
+
     -- Center currently floating client
     awful.key(
         {modkey, "Shift"},
         "c",
         function(c)
             awful.placement.centered(c, {
-                honor_workarea = true
+                honor_workarea = true,
+                honor_padding = true,
             })
+            helpers.single_double_tap(
+                nil,
+                function()
+                    helpers.float_and_resize(c, screen_width(c) * 0.65, screen_height(c) * 0.8)
+                end
+            )
         end,
-        { description = 'Center client', group = 'Client'}
+        { description = 'Center client (double tap to center and grow)', group = 'Client'}
     )
 )
 

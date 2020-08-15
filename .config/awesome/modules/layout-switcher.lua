@@ -8,7 +8,7 @@ local modkey      = require("config.keys.mod").modKey
 
 local ll = awful.widget.layoutlist {
     source      = awful.widget.layoutlist.source.default_layouts, --DOC_HIDE
-    spacing = dpi(24),
+    spacing     = dpi(24),
     base_layout = wibox.widget {
         spacing         = dpi(24),
         forced_num_cols = 4,
@@ -45,7 +45,7 @@ local layout_popup = awful.popup {
     shape        = helpers.rrect(beautiful.border_radius),
     ontop        = true,
     visible      = false,
-    bg           = beautiful.bg_normal,
+    bg           = beautiful.xbackground .. "c0",
 }
 
 -- Make sure you remove the default `Mod4+Space` and `Mod4+Shift+Space`
@@ -80,11 +80,19 @@ awful.keygrabber {
     stop_event = "release",
     stop_key = {"Escape", "Super_L", "Super_R", "Mod4"},
     keybindings = {
-        {{ modkey , "Shift" } , " " , function()
-             awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, -1), nil)
-        end},
-        {{ modkey  } , " " , function()
-             awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, 1), nil)
-        end},
+        {
+            { modkey, "Shift" },
+            " ",
+            function()
+                awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, -1), nil)
+            end
+        },
+        {
+            { modkey },
+            " ",
+            function()
+                awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, 1), nil)
+            end
+        },
     }
 }
