@@ -3,7 +3,7 @@ local gears = require('gears')
 local awesome, client, screen = _G.awesome, _G.client, _G.screen
 
 local hotkeys_popup = require('awful.hotkeys_popup').widget
-
+local helpers = require('helpers')
 local modkey = require('config.keys.mod').modKey
 local altkey = require('config.keys.mod').altKey
 local apps = require('config.apps')
@@ -220,11 +220,14 @@ for i = 1, 9 do
             {modkey},
             '#' .. i + 9,
             function()
+                helpers.tag_back_and_forth(i)
+                --[[
                 local focused = awful.screen.focused()
                 local tag = focused.tags[i]
                 if tag then
                     tag:view_only()
                 end
+                ]]--
             end,
             descr_view
         ),

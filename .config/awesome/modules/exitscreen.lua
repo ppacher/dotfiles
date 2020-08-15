@@ -107,7 +107,6 @@ local lock = create_button(lock_text_icon, beautiful.xcolor5, "Lock", lock_comma
 -- Greeter and profile message boxes.
 local greeter_message = wibox.widget { 
     markup = "Choose wisely!",
-    --font = "Inter UltraLight 48",
     font = "Marigolds 88",
     align = "center",
     valign = "center",

@@ -127,14 +127,14 @@ end
 function helpers.add_hover_cursor(w, hover_cursor)
     local original_cursor = "left_ptr"
 
-    w:connect_signal("mouse::enter", function ()
+    w:connect_signal("mouse::enter", function()
         local w = _G.mouse.current_wibox
         if w then
             w.cursor = hover_cursor
         end
     end)
 
-    w:connect_signal("mouse::leave", function ()
+    w:connect_signal("mouse::leave", function()
         local w = _G.mouse.current_wibox
         if w then
             w.cursor = original_cursor
@@ -404,6 +404,18 @@ function helpers.float_and_resize(c, width, height)
     awful.client.property.set(c, 'floating_geometry', c:geometry())
     c.floating = true
     c:raise()
+end
+
+function helpers.screen_mask(s, bg)
+    local mask = wibox {
+        visible = false,
+        ontop = true,
+        type = "splash",
+        screen = s,
+        bg = bg or (beautiful.xbackground .. "c0")
+    }
+    awful.placement.maximize(mask)
+    return mask
 end
 
 return helpers

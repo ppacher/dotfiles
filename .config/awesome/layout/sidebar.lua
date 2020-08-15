@@ -26,6 +26,12 @@ sidebar = wibox {
 }
 
 sidebar:buttons(gears.table.join(
+    awful.button({ }, 1, function ()
+        if app_drawer_show then
+            app_drawer_show()
+        end
+        sidebar.visible = false
+    end),
     -- Middle click - Hide sidebar
     awful.button({ }, 2, function ()
         sidebar.visible = false

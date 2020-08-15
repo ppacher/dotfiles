@@ -8,7 +8,10 @@
 
 local gears = require("gears")
 
-local function file_exists(path)
+
+local icons = {}
+
+function icons.file_exists(path)
     -- Try to open it
     local f = io.open(path)
     if f then
@@ -17,8 +20,6 @@ local function file_exists(path)
     end
     return false
 end
-
-local icons = {}
 
 -- Available icons
 local icon_names = {
@@ -80,6 +81,8 @@ local icon_names = {
     "suspend",
     "lock",
     "brightness",
+    -- Applications
+    "netflix",
 }
 
 -- Path to icons

@@ -48,9 +48,8 @@ require('config.layouts')
 
 root.keys(require('config.keys.global'))
 
--- Notification rules
-
--- }}}
+local icons = require("icons")
+icons.init("sheet")
 
 -- Modules {{{
 -- ------------------------------------
@@ -58,6 +57,7 @@ require("modules.layout-switcher")
 require("modules.autostart")
 require("modules.exitscreen")
 require("modules.backdrop")
+require("modules.app_drawer")
 
 local notifs = require("notifications")
 notifs.init()
