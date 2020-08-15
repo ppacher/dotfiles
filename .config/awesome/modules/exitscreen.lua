@@ -7,7 +7,6 @@ local dpi = xresources.apply_dpi
 -- local naughty = require("naughty")
 local helpers = require("helpers")
 
-
 -- Appearance
 local icon_font = "Font Awesome 5 45"
 local poweroff_text_icon = ""
@@ -115,6 +114,58 @@ local greeter_message = wibox.widget {
     widget = wibox.widget.textbox
 }
 
+
+
+local function exit_screen_hide()
+    _G.awesome.emit_signal('module::exit_screen_hide')
+end
+
+local exit_screen_grabber = awful.keygrabber {
+    auto_start = true,
+    stop_event = 'release',
+    keypressed_callback = function(self, mod, key, command)
+        -- Ignore case
+        key = key:lower()
+        
+        if key == 's' then
+            suspend_command()
+        elseif key == 'e' then
+            exit_command()
+        elseif key == 'l' then
+            lock_command()
+        elseif key == 'p' then
+            poweroff_command()
+        elseif key == 'r' then
+            reboot_command()
+        elseif key == 'escape' or key == 'q' or key == 'x' then
+            exit_screen_hide()
+        end
+    end
+}
+
+_G.awesome.connect_signal(
+    'module::exit_screen_show',
+    function()
+        for s in _G.screen do
+            s.exit_screen.visible = true
+            s.exit_screen:get_children_by_id("content")[1]:set_visible(false)
+        end
+        awful.screen.focused().exit_screen.visible = true
+        awful.screen.focused().exit_screen:get_children_by_id("content")[1]:set_visible(true)
+        exit_screen_grabber:start()
+    end
+)
+
+_G.awesome.connect_signal(
+    'module::exit_screen_hide',
+    function()
+        exit_screen_grabber:stop()
+        for s in _G.screen do
+            s.exit_screen.visible = false
+        end
+    end
+)
+
 _G.screen.connect_signal(
     'request::desktop_decoration',
     function(s)
@@ -132,58 +183,6 @@ _G.screen.connect_signal(
             x = s.geometry.x,
             y = s.geometry.y,
         }
-
-        local function exit_screen_hide()
-            _G.awesome.emit_signal('module::exit_screen_hide')
-        end
-
-        local exit_screen_grabber = awful.keygrabber {
-            auto_start = true,
-            stop_event = 'release',
-            keypressed_callback = function(self, mod, key, command)
-                -- Ignore case
-                key = key:lower()
-
-                if key == 's' then
-                    suspend_command()
-                elseif key == 'e' then
-                    exit_command()
-                elseif key == 'l' then
-                    lock_command()
-                elseif key == 'p' then
-                    poweroff_command()
-                elseif key == 'r' then
-                    reboot_command()
-                elseif key == 'escape' or key == 'q' or key == 'x' then
-                    exit_screen_hide()
-                end
-            end
-        }
-
-        _G.awesome.connect_signal(
-            'module::exit_screen_show',
-            function()
-                print("[module:exit_screen] signal module::exit_screen_show received")
-                for s in _G.screen do
-                    s.exit_screen.visible = true
-                    s.exit_screen:get_children_by_id("content")[1]:set_visible(false)
-                end
-                awful.screen.focused().exit_screen.visible = true
-                awful.screen.focused().exit_screen:get_children_by_id("content")[1]:set_visible(true)
-                exit_screen_grabber:start()
-            end
-        )
-
-        _G.awesome.connect_signal(
-            'module::exit_screen_hide',
-            function()
-                print("[module:exit_screen] signal module::exit_screen_hide received")
-                exit_screen_grabber:stop()
-                for s in _G.screen do
-                    s.exit_screen.visible = false
-                end
-            end
-        )
 
         -- follow mouse and show the buttons only on the active
         -- screen
@@ -208,8 +207,6 @@ _G.screen.connect_signal(
                 exit_screen_hide()
             end)
         ))
-
-
 
         s.exit_screen : setup {
             nil,
