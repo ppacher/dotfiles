@@ -5,6 +5,7 @@ with other people's dotfiles. See below for an incomplete list of dots that help
 
 ## Inspiration and related dots
 
-- [JavaCafe01](https://github.com/JavaCafe01/dotfiles)
+- [elenapan](https://github.com/elenapan/dotfiles)
 - [Manilarome](https://github.com/manilarome/the-glorious-dotfiles)
 - [PapyElGringo](https://github.com/PapyElGringo/material-awesome)
+- [JavaCafe01](https://github.com/JavaCafe01/dotfiles)
