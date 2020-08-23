@@ -58,6 +58,7 @@ require("modules.autostart")
 require("modules.exitscreen")
 require("modules.backdrop")
 require("modules.app_drawer")
+require("modules.screenblank").init()
 
 local notifs = require("notifications")
 notifs.init()

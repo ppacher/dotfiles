@@ -100,8 +100,8 @@ end)
 fancy_date_widget.align = "center"
 fancy_date_widget.valign = "center"
 fancy_date_widget.font = "Iosevka Extended 15"
-local fancy_date_decoration = wibox.widget.textbox()
 
+local fancy_date_decoration = wibox.widget.textbox()
 local decoration_string = "──────  ──────"
 fancy_date_decoration.markup = helpers.colorize_text(decoration_string, beautiful.xcolor2)
 fancy_date_decoration.font = "Iosevka Extended 25"

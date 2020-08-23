@@ -174,6 +174,31 @@ local function create_stripe(widgets)
     return stripe
 end
 
+-- Date and time widgets
+--
+local time = wibox.widget {
+    format = "%H%M",
+    widget = wibox.widget.textclock,
+    font = "Marigolds 60",
+}
+
+time.markup = time.text:sub(1,2) .. helpers.colorize_text(time.text:sub(3,4), beautiful.xcolor12)
+time:connect_signal("widget::redraw_needed", function () 
+    time.markup = time.text:sub(1,2) .. helpers.colorize_text(time.text:sub(3,4), beautiful.xcolor12) 
+end)
+
+local date = wibox.widget {
+    format = '%A %d',
+    widget = wibox.widget.textclock,
+    font = "Marigolds 60",
+}
+
+date.markup = helpers.colorize_text(date.text, beautiful.xcolor12)
+date:connect_signal("widget::redraw_needed", function () 
+    date.markup = helpers.colorize_text(date.text, beautiful.xcolor12)
+end)
+
+
 --- create the buttons
 --
 local apps = require("config.apps")
@@ -194,7 +219,7 @@ app_drawer:setup {
         create_stripe({
             {
                 {
-                    markup = "Whats up?",
+                    markup = "What's up?",
                     font = "Marigolds 88",
                     align = "center",
                     valign = "center",
@@ -206,6 +231,28 @@ app_drawer:setup {
                     align = "center",
                     valign = "top",
                     widget = wibox.widget.textbox()
+                },
+                {
+                    nil,
+                    {
+    
+                        {
+                            text = "it's ",
+                            font = "Marigolds 40",
+                            widget = wibox.widget.textbox,
+                        },
+                        time,
+                        {
+                            text = "on",
+                            font = "Marigolds 40",
+                            widget = wibox.widget.textbox,
+                        },
+                        date,
+                        spacing = dpi(30),
+                        layout = wibox.layout.fixed.horizontal,
+                    },
+                    expand = "none",
+                    layout = wibox.layout.align.horizontal,
                 },
                 layout = wibox.layout.align.vertical,
             }

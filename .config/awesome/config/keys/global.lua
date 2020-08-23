@@ -123,12 +123,6 @@ local globalKeys = gears.table.join(
         end,
         {description = 'view next tag', group = 'tag'}
     ),
-    awful.key(
-        {modkey},
-        'Escape',
-        awful.tag.history.restore,
-        {description = 'Toggle last tag', group = 'tag'}
-    ),
     awful.key({ modkey, "Control" },
         "d",
         function ()

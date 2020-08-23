@@ -16,6 +16,7 @@ depends=(
   'picom-tryone-git'
   'rofi-git'
   'playerctl'
+  'xidlehook'
 
   #
   # Apps

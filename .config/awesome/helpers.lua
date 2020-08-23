@@ -406,6 +406,9 @@ function helpers.float_and_resize(c, width, height)
     c:raise()
 end
 
+-- Screen related helpers
+--
+
 function helpers.screen_mask(s, bg)
     local mask = wibox {
         visible = false,

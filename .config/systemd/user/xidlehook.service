@@ -1,0 +1,11 @@
+[Unit]
+Description=Screenblack AwesomeWM xidlehook
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=2
+ExecStart=xidlehook --not-when-fullscreen --not-when-audio --timer 10 'awesome-client \'awesome.emit_signal("evil::xidle")\'' 'awesome-client \'awesome.emit_signal("evil::no-xidle")\''
+
+[Install]
+WantedBy=default.target
