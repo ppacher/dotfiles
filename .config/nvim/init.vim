@@ -1,8 +1,3 @@
-if exists("g:vscode")
-    " this is vscode, return
-    exit
-endif
-
 "
 "--- Plugins ---"
 source $HOME/.config/nvim/vim-plug/plugins.vim

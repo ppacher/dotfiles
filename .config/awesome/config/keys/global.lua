@@ -162,6 +162,25 @@ local globalKeys = gears.table.join(
         end,
         {description = "open application drawer", group = 'launcher'}
     ),
+    
+    -- Switch between screens
+    --
+    awful.key(
+        { modkey, altkey },
+        'Left',
+        function()
+            awful.screen.focus_relative(1)
+        end,
+        {description = "Focus next screen", group="utils"}
+    ),
+    awful.key(
+        { modkey, altkey },
+        'Right',
+        function()
+            awful.screen.focus_relative(-1)
+        end,
+        {description = "Focus next screen", group="utils"}
+    ),
 
     -- Utilities
     --
