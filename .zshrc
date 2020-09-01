@@ -21,8 +21,6 @@ source ${HOME}/.profile
 #
 alias v=nvim
 alias icat="kitty +kitten icat"
-alias c="clear"
-alias systemctl="systemctl --user"
 
 #
 # Enable common command replacments
