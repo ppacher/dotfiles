@@ -1,6 +1,6 @@
 {
     "go.formatTool": "goimports",
-    "editor.fontFamily": "Consolas Ligaturized, Font Awesome",
+    "editor.fontFamily": "FiraCode Nerd Font",
     "editor.fontSize": 13,
     "editor.fontLigatures": true,
     "editor.scrollBeyondLastLine": false,

@@ -1,6 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="ys"
+#ZSH_THEME="ys"
+ZSH_THEME="paz"
 
 plugins=(git forgit dotbare fzf-zsh-completions)
 
@@ -46,4 +47,4 @@ source /usr/share/fzf/key-bindings.zsh
 #
 source /usr/share/zsh/plugins/emoji-cli/emoji-cli.zsh
 
-clear ; lastlogin ; fetch
+#clear ; lastlogin ; fetch

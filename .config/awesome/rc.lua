@@ -150,6 +150,18 @@ end)
 
 
 -- {{{ Signals
+
+-- Idle handling
+--  - show app drawer after a minute
+--  - active screensaver after 5 minutes
+awesome.connect_signal("evil::idle::minute", function(idletime)
+    app_drawer_show()
+
+    if idletime == 300 then
+        awesome.emit_signal("evil::screensaver", true)
+    end
+end)
+
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function(c)
     -- Set the windows at the slave,

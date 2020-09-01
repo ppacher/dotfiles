@@ -8,11 +8,11 @@ local dpi = xresources.apply_dpi
 local helpers = require("helpers")
 
 -- Appearance
-local icon_font = "Font Awesome 5 45"
+local icon_font = "Font Awesome 5 Free 40"
 local poweroff_text_icon = ""
 local reboot_text_icon = ""
 local suspend_text_icon = ""
-local exit_text_icon = ""
+local exit_text_icon = ""
 local lock_text_icon = ""
 local exitscreen_bg = beautiful.xbackground .. "99"
 

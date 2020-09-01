@@ -119,7 +119,7 @@ naughty.connect_signal("request::display", function(n)
 	-- we are going to use that instead of the icon.
 	if n.icon_text then
 		icon_widget = wibox.widget {
-			font = n.icon_font or "Font Awesome 5 Free 19",
+			font = n.icon_font or (beautiful.icon_font .." 19"),
 			align = "center",
 			valign = "center",
 			widget = wibox.widget.textbox
