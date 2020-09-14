@@ -20,8 +20,8 @@ local theme = dofile(themes_path.."default/theme.lua")
 
 -- Titlebar icon path
 local tip = "~/.config/awesome/theme/icons/titlebar/"
---theme.wallpaper = gears.filesystem.get_configuration_dir() .. "theme/wall.png"
---theme.wallpaper = "~/Pictures/wallpapers/wall.png"
+
+local transparent = '#00000000'
 
 -- Load ~/.Xresources colors and set fallback colors
 theme.xbackground =  xrdb.background  or  "#2f343f" 
@@ -228,7 +228,7 @@ theme.layoutlist_border_color = theme.xbackground
 theme.layoutlist_border_width = dpi(0)
 theme.systray_icon_spacing = dpi(3)
 
-theme.bg_systray = xbackground
+theme.bg_systray = theme.xbackground
 
 theme.wibar_height = dpi(27)
 theme.wibar_margin = dpi(15)

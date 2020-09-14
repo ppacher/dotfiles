@@ -1,9 +1,6 @@
-local awful = require('awful')
-local gears = require('gears')
+local awful     = require('awful')
 local beautiful = require('beautiful')
-local apps = require('config.apps')
-
---local icons = require('theme.icons')
+local apps      = require('config.apps')
 
 local tags = {
     {
@@ -34,56 +31,6 @@ local tags = {
     }
 }
 
-_G.tag.create = function(name, screen)
-    screen = screen or awful.screen.focused()
-
-    local t = awful.tag.add(
-        name,
-        {
-            icon_only = true,
-            layout = awful.layout.suit.spiral.dwindle,
-            gap_single_client = false,
-            gab = beautiful.useless_gap,
-            screen = screen,
-            default_app = 'terminal',
-            dynamic = true,
-        }
-    )
-
-    t:view_only()
-    --t.icon = icons[t.index]
-end
-
-_G.tag.delete_selected = function()
-    local t = awful.screen.focused().selected_tag
-    if not t then return end
-    t:delete()
-end
-
--- dynamic tags have their index as the icon
--- so we need to ensure to update them when
--- they are moved around.
-_G.tag.connect_signal(
-    'property::index',
-    function(tag, index)
-        if tag.dynamic then
-            --tag.icon = icons[tag.index]
-            print("tag " .. tag.name .. " gets icon " .. tag.icon)
-        end
-    end
-)
-
-_G.tag.connect_signal(
-    'request::default_layouts',
-    function()
-        awful.layout.append_default_layouts({
-            awful.layout.suit.spiral.dwindle,
-            awful.layout.suit.tile,
-            awful.layout.suit.max
-        })
-    end
-)
-
 _G.screen.connect_signal(
     'request::desktop_decoration',
     function(s)
@@ -103,6 +50,19 @@ _G.screen.connect_signal(
                     }
                 )
             end
+        end
+
+        local tagCount = #s.tags
+        for i = tagCount + 1, 6 do
+            awful.tag.add(
+                i,
+                {
+                    layout = awful.layout.suit.tile,
+                    gap_single_client = false,
+                    gap = beautiful.useless_gap,
+                    screen = s,
+                }
+            )
         end
     end
 )

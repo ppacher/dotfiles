@@ -1,3 +1,5 @@
+-- awesome_mode: api-level=4:screen=on
+
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
@@ -5,13 +7,11 @@ pcall(require, "luarocks.loader")
 local gears     = require("gears")
 local awful     = require("awful")
 local beautiful = require("beautiful")
-
-require("awful.autofocus")
+local permissions = require("awful.permissions")
 
 -- Theme {{{
 -- ------------------------------------
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
-
 -- }}}
 
 -- {{{ Error handling
@@ -42,11 +42,10 @@ end
 
 -- Client and keys and layouts configuration {{{
 -- ------------------------------------
-require('config.tags')
-require('config.client')
 require('config.layouts')
-
-root.keys(require('config.keys.global'))
+require('config.tags')
+require('config.keys.global')
+require('config.client')
 
 local icons = require("icons")
 icons.init("sheet")
@@ -96,10 +95,6 @@ local myawesomemenu = {
 
 local mymainmenu = awful.menu {
     items = {
-        { "Terminal Emulator", terminal },
-        { "Web Browser", browser },
-        { "File Manager", filemanager} ,
-        { "Search " , "rofia "} ,
         { "awesome", myawesomemenu },
     },
 }
@@ -122,11 +117,11 @@ screen.connect_signal("property::geometry", set_wallpaper)
 
 
 -- {{{ Mouse bindings
-root.buttons(gears.table.join(
+awful.mouse.append_global_mousebindings({
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
-))
+})
 -- }}}
 
 -- {{{ Enable THICC Title Bars only while Floating
@@ -154,10 +149,10 @@ end)
 -- Idle handling
 --  - show app drawer after a minute
 --  - active screensaver after 5 minutes
-awesome.connect_signal("evil::idle::minute", function(idletime)
+awesome.connect_signal("evil::idle", function(idletime)
     app_drawer_show()
 
-    if idletime == 300 then
+    if idletime == "5min" then
         awesome.emit_signal("evil::screensaver", true)
     end
 end)
@@ -176,27 +171,21 @@ client.connect_signal("manage", function(c)
     end
 end)
 
-
 -- Enable sloppy focus, so that focus follows mouse.
-_G.client.connect_signal(
-    'mouse::enter',
-    function(c)
-        c:emit_signal('request::activate', 'mouse_enter', {raise = c.floating})
-    end
-)
+client.connect_signal("mouse::enter", function(c)
+    c:activate { context = "mouse_enter", raise = false }
+end)
 
 -- Change client border when focused/unfocused
-_G.client.connect_signal(
+client.connect_signal(
     'focus', 
     function(c)
         c.border_color = beautiful.border_focus
     end
 )
-_G.client.connect_signal(
+client.connect_signal(
     'unfocus', 
     function(c)
         c.border_color = beautiful.border_normal
     end
 )
-
-_G.root.keys(require('config.keys.global'))

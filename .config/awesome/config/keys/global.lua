@@ -1,6 +1,6 @@
 local awful = require('awful')
 local gears = require('gears')
-local awesome, client, screen = _G.awesome, _G.client, _G.screen
+local awesome, client = _G.awesome, _G.client
 
 local hotkeys_popup = require('awful.hotkeys_popup').widget
 local helpers = require('helpers')
@@ -9,7 +9,7 @@ local altkey = require('config.keys.mod').altKey
 local apps = require('config.apps')
 
 -- Global key bindings
-local globalKeys = gears.table.join(
+awful.keyboard.append_global_keybindings({
     -- Most important, Mod4 + Enter => launch kitty
     --
     awful.key(
@@ -32,7 +32,7 @@ local globalKeys = gears.table.join(
             end
         end
     ),
-    
+
     -- Awesome Control Keys
     --
     awful.key(
@@ -211,7 +211,7 @@ local globalKeys = gears.table.join(
         end,
         {description = "show exit screen", group = "launcher"}
     )
-)
+})
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
@@ -225,10 +225,7 @@ for i = 1, 9 do
         descr_move = {description = 'move focused client to tag #', group = 'tag'}
         descr_toggle_focus = {description = 'toggle focused client on tag #', group = 'tag'}
     end
-    globalKeys =
-        awful.util.table.join(
-        globalKeys,
-        -- View tag only.
+    awful.keyboard.append_global_keybindings({
         awful.key(
             {modkey},
             '#' .. i + 9,
@@ -285,7 +282,5 @@ for i = 1, 9 do
             end,
             descr_toggle_focus
         )
-    )
+    })
 end
-
-return globalKeys

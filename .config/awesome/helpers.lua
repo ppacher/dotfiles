@@ -354,20 +354,6 @@ function helpers.prompt(action, textbox, prompt, callback)
             completion_callback = awful.completion.shell,
             history_path = awful.util.get_cache_dir() .. "/history"
         }
-    elseif action == "web_search" then
-        awful.prompt.run {
-            prompt       = prompt,
-            -- prompt       = '<b>Web search: </b>',
-            textbox      = textbox,
-            font = prompt_font,
-            history_path = awful.util.get_cache_dir() .. "/history_web",
-            done_callback = callback,
-            exe_callback = function(input)
-                if not input or #input == 0 then return end
-                awful.spawn(user.web_search_cmd.."\""..input.."\"")
-                naughty.notify { title = "Searching the web for", text = input, icon = icons.firefox }
-            end
-        }
     end
 end
 

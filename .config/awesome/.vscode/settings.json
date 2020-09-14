@@ -1,0 +1,16 @@
+{
+    "Lua.diagnostics.disable": [
+        "lowercase-global"
+    ],
+    "Lua.diagnostics.globals": [
+        "screen",
+        "awesome",
+        "root",
+        "client",
+        "tag",
+        "mouse"
+    ],
+    "Lua.workspace.library": {
+        "/usr/share/awesome/lib": true
+    }
+}

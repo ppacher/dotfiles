@@ -72,11 +72,11 @@ end
 
 awful.keygrabber {
     start_callback = function()
-        layout_popup.screen = _G.mouse.screen
-        layout_popup.visible = true 
+        layout_popup.screen = mouse.screen
+        layout_popup.visible = true
     end,
     stop_callback  = function() layout_popup.visible = false end,
-    export_keybindings = true, 
+    export_keybindings = true,
     stop_event = "release",
     stop_key = {"Escape", "Super_L", "Super_R", "Mod4"},
     keybindings = {

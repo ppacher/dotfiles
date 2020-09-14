@@ -112,8 +112,7 @@ end)
 -- Naughty template
 naughty.connect_signal("request::display", function(n)
     local icon_widget = naughty.widget.icon
-
-    print("[notify] " .. (n.app_name or "<no-name>"))
+    local title_visible = true
     
 	-- if the notification has a icon_text property
 	-- we are going to use that instead of the icon.

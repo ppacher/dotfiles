@@ -49,7 +49,7 @@ local function create_button(symbol, color, hover_color, cmd, key)
 
     -- Bind left click to run the command
     button:buttons(gears.table.join(
-        awful.button({ }, 1, command)
+        awful.button({ }, 1, cmd)
     ))
 
     -- Change color on hover

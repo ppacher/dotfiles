@@ -3,7 +3,6 @@ local gears     = require("gears")
 local wibox     = require("wibox")
 local beautiful = require("beautiful")
 local helpers   = require("helpers")
-local pad       = helpers.pad
 local dpi       = require("beautiful").xresources.apply_dpi
 
 -- Set up icons
@@ -14,7 +13,7 @@ icons.init(icon_theme)
 
 local height = beautiful.sidebar_height or awful.screen.focused().geometry.height
 sidebar = wibox {
-    visible = true,
+    visible = false,
     ontop = true,
     type = "dock",
     bg = beautiful.sidebar_bg or beautiful.xbackground .. 'df',

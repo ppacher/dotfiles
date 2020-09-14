@@ -5,7 +5,7 @@ Description=Screenblack AwesomeWM xidlehook
 Type=simple
 Restart=always
 RestartSec=2
-ExecStart=xidlehook --not-when-fullscreen --not-when-audio --timer 10 'awesome-client \'awesome.emit_signal("evil::xidle")\'' 'awesome-client \'awesome.emit_signal("evil::no-xidle")\''
+ExecStart=xidlehook --not-when-fullscreen --not-when-audio --timer 60 'awesome-client \'awesome.emit_signal("evil::idle", "1min")\'' 'awesome-client \'awesome.emit_signal("evil::no-idle")\'' --timer 300 'awesome-client \'awesome.emit_signal("evil::idle", "5min")\'' 'awesome-client \'awesome.emit_signal("evil::no-idle")\'' 
 
 [Install]
 WantedBy=default.target

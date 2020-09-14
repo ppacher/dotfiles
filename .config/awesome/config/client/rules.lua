@@ -3,9 +3,6 @@ local gears = require('gears')
 local ruled = require('ruled')
 local beautiful = require('beautiful')
 
-local client_keys = require('config.client.keys')
-local client_buttons = require('config.client.buttons')
-
 ruled.client.connect_signal('request::rules', function()
     ruled.client.append_rule {
         id              = "global",
@@ -25,8 +22,6 @@ ruled.client.connect_signal('request::rules', function()
             maximized_vertical      = false,
             rounded_corners         = true,
             size_hints_honor        = true,
-            keys                    = client_keys,
-            buttons                 = client_buttons,
             screen                  = awful.screen.preferred,
             placement               = awful.placement.no_overlap + awful.placement.no_offscreen,
         }

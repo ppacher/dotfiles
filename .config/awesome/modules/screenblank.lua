@@ -1,4 +1,4 @@
-local awful = require("awful")
+local awful  = require("awful")
 
 local screenblank = {}
 
@@ -26,22 +26,6 @@ function screenblank.init()
         else
             awful.spawn("xset dpms force off")
         end
-    end)
-
-    awesome.connect_signal("evil::xidle", function()
-        idle_counter = idle_counter + 10
-
-        if idle_counter % 60 == 0 then
-            awesome.emit_signal("evil::idle::minute", idle_counter)
-        end
-
-        if idle_counter % 3600 == 0 then
-            awesome.emit_signal("evil::idle::hour", idle_counter)
-        end
-    end)
-
-    awesome.connect_signal("evil::no-xidle", function()
-        idle_counter = 0
     end)
 end
 

@@ -14,8 +14,6 @@ local reboot_text_icon = ""
 local suspend_text_icon = ""
 local exit_text_icon = ""
 local lock_text_icon = ""
-local exitscreen_bg = beautiful.xbackground .. "99"
-
 local button_bg = beautiful.xcolor0
 local button_size = dpi(120)
 
@@ -27,13 +25,13 @@ local reboot_command = function()
     awful.spawn.with_shell("systemctl reboot")
 end
 local suspend_command = function()
-    if lock_screen_show then
-        lock_screen_show()
+    if _G.lock_screen_show then
+        _G.lock_screen_show()
     end
     awful.spawn.with_shell("systemctl suspend")
 end
 local exit_command = function()
-    _G.awesome.quit()
+    awesome.quit()
 end
 local lock_command = function()
     awful.spawn.with_shell("~/.bin/lock")

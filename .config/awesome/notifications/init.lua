@@ -1,3 +1,5 @@
+local naughty = require('naughty')
+
 local notifications = {}
 
 -- >> Notify DWIM (Do What I Mean):
