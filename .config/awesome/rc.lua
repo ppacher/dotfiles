@@ -7,7 +7,6 @@ pcall(require, "luarocks.loader")
 local gears     = require("gears")
 local awful     = require("awful")
 local beautiful = require("beautiful")
-local permissions = require("awful.permissions")
 
 -- Theme {{{
 -- ------------------------------------
@@ -52,12 +51,12 @@ icons.init("sheet")
 
 -- Modules {{{
 -- ------------------------------------
-require("modules.layout-switcher")
-require("modules.autostart")
-require("modules.exitscreen")
-require("modules.backdrop")
-require("modules.app_drawer")
-require("modules.screenblank").init()
+local modules = require('module-system')
+modules:start()
+
+if modules.app_drawer then
+    print("app drawer loaded")
+end
 
 local notifs = require("notifications")
 notifs.init()
@@ -150,9 +149,10 @@ end)
 --  - show app drawer after a minute
 --  - active screensaver after 5 minutes
 awesome.connect_signal("evil::idle", function(idletime)
-    app_drawer_show()
-
     if idletime == "5min" then
+        app_drawer_show()
+    end
+    if idletime == "10min" then
         awesome.emit_signal("evil::screensaver", true)
     end
 end)

@@ -1,9 +1,7 @@
-local awful = require('awful')
 local ruled = require('ruled')
-local naughty = require('naughty')
-local beautiful = require('beautiful') 
+local beautiful = require('beautiful')
 
-ruled.notification.connect_signal('request::rules', function()	
+ruled.notification.connect_signal('request::rules', function()
     ruled.notification.append_rule {
         rule = { app_name = "Spotify" },
         properties = {

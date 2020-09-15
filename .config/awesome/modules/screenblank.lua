@@ -1,4 +1,5 @@
 local awful  = require("awful")
+local modules = require('module-system')
 
 local screenblank = {}
 
@@ -12,9 +13,7 @@ function screenblank.dpms_on()
     awesome.emit_signal("evil::screensaver", false)
 end
 
-local idle_counter = 0
-
-function screenblank.init()
+function init()
     -- Enables DPMS but disables automatic suspend/standby
     -- timers as we are handling them ourself using 
     -- xidlehook.
@@ -28,5 +27,10 @@ function screenblank.init()
         end
     end)
 end
+
+modules:connect_signal("request::init", function()
+    print("initializing screenblank module")
+    init()
+end)
 
 return screenblank

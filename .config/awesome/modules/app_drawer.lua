@@ -88,7 +88,7 @@ local app_drawer = wibox{
 
 awful.placement.maximize(app_drawer)
 
-_G.screen.connect_signal(
+screen.connect_signal(
     'request::desktop_decoration',
     function(s)
         if s == screen.primary then
@@ -203,17 +203,20 @@ end)
 --
 local apps = require("config.apps")
 
-local function spawn(what)
+-----
+-- return a function that executes what inside a shell
+-- @tparam string what The command to execute
+-- @treturn function
+local function spawner(what)
     return function()
         awful.spawn.with_shell(what)
     end
 end
 
-terminal = create_button("", beautiful.xcolor3, beautiful.xcolor11, spawn(apps.terminal), "t")
-browser = create_button("netflix", beautiful.xcolor5, beautiful.xcolor13, spawn(apps.browser), "b")
+terminal = create_button("", beautiful.xcolor3, beautiful.xcolor11, spawner(apps.terminal), "t")
+browser = create_button("netflix", beautiful.xcolor5, beautiful.xcolor13, spawner(apps.browser), "b")
 
 app_drawer:setup {
-    -- Background
     {
         create_stripe({}),
         create_stripe({
@@ -235,7 +238,6 @@ app_drawer:setup {
                 {
                     nil,
                     {
-    
                         {
                             text = "it's ",
                             font = "Marigolds 40",
@@ -261,6 +263,5 @@ app_drawer:setup {
         create_stripe({}),
         layout = wibox.layout.flex.vertical
     },
-    --bg = beautiful.xbackground .. "c0",
     widget = wibox.container.background
 }
