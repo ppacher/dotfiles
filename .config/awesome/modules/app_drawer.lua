@@ -4,9 +4,10 @@ local wibox     = require("wibox")
 local beautiful = require("beautiful")
 local dpi       = require("beautiful.xresources").apply_dpi
 local helpers   = require("helpers")
-local icons     = require("icons")
+local utils     = require("utils")
 
 local keybindings = {}
+local icons = {} -- TODO(ppacher): fix me
 
 -- Create a icon button with "hover" and "click" effects.
 -- If cmd is given it is executed when clicked. 
@@ -136,10 +137,10 @@ end
 
 app_drawer:buttons(gears.table.join(
     awful.button({ }, 1, function()
-        app_drawer_hide()
+        --app_drawer_hide()
     end),
     awful.button({ }, 2, function()
-        app_drawer_hide()
+        --app_drawer_hide()
     end),
     awful.button({ }, 3, function()
         app_drawer_hide()
@@ -213,8 +214,32 @@ local function spawner(what)
     end
 end
 
-terminal = create_button("", beautiful.xcolor3, beautiful.xcolor11, spawner(apps.terminal), "t")
-browser = create_button("netflix", beautiful.xcolor5, beautiful.xcolor13, spawner(apps.browser), "b")
+--terminal = create_button("", beautiful.xcolor3, beautiful.xcolor11, spawner(apps.terminal), "t")
+local browser = create_button("netflix", beautiful.xcolor5, beautiful.xcolor13, spawner(apps.browser), "b")
+
+local terminal = utils.buttons.with_icon {
+    icon = "terminal",
+    size = dpi(100),
+    color = beautiful.xcolor5,
+    shape = 'rounded_rect',
+    type = 'outline',
+    outline_border_width = dpi(5)
+}
+
+local textbtn = utils.buttons.with_text{
+    text = "Test",
+    shape = 'basic',
+    color = beautiful.xcolor13,
+    hover_color = beautiful.xcolor13,
+}
+
+local textbtn2 = utils.buttons.with_icon_and_text{
+    icon = "activity",
+    text = "Test",
+    shape = 'basic',
+    color = beautiful.xcolor1,
+    hover_color = beautiful.xcolor1,
+}
 
 app_drawer:setup {
     {
@@ -260,6 +285,7 @@ app_drawer:setup {
             }
         }),
         create_stripe({terminal, browser}),
+        create_stripe({textbtn, textbtn2}),
         create_stripe({}),
         layout = wibox.layout.flex.vertical
     },

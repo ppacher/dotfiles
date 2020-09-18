@@ -5,12 +5,6 @@ local beautiful = require("beautiful")
 local helpers   = require("helpers")
 local dpi       = require("beautiful").xresources.apply_dpi
 
--- Set up icons
---
-local icon_theme = "sheet"
-local icons = require("icons")
-icons.init(icon_theme)
-
 local height = beautiful.sidebar_height or awful.screen.focused().geometry.height
 sidebar = wibox {
     visible = false,

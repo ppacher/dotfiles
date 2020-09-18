@@ -39,6 +39,10 @@ do
 end
 -- }}}
 
+-- {{{ Theme Widget configurations
+require('utils.buttons').icon_path = gears.filesystem.get_configuration_dir() .. 'theme/icons/feather/'
+-- }}}
+
 -- Client and keys and layouts configuration {{{
 -- ------------------------------------
 require('config.layouts')
@@ -46,26 +50,19 @@ require('config.tags')
 require('config.keys.global')
 require('config.client')
 
-local icons = require("icons")
-icons.init("sheet")
-
 -- Modules {{{
 -- ------------------------------------
 local modules = require('module-system')
 modules:start()
-
-if modules.app_drawer then
-    print("app drawer loaded")
-end
 
 local notifs = require("notifications")
 notifs.init()
 
 -- Layout {{{
 -- ------------------------------------
-require("layout.toppanel")
-require("layout.sidebar")
+require("layout")
 --}}}
+
 
 -- Decorations
 --

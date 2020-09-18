@@ -109,7 +109,7 @@ awful.keyboard.append_global_keybindings({
     --
     awful.key(
         {modkey},
-        'd',
+        'a',
         function()
             awful.tag.viewprev()
         end,
@@ -117,14 +117,15 @@ awful.keyboard.append_global_keybindings({
     ),
     awful.key(
         {modkey},
-        'a',
+        'd',
         function()
             awful.tag.viewnext()
         end,
         {description = 'view next tag', group = 'tag'}
     ),
-    awful.key({ modkey, "Control" },
-        "d",
+    awful.key(
+        { modkey, "Control" },
+        "Right",
         function ()
             -- tag_view_nonempty(-1)
             local focused = awful.screen.focused()
@@ -137,8 +138,9 @@ awful.keyboard.append_global_keybindings({
         end,
         {description = "view previous non-empty tag", group = "tag"}
     ),
-    awful.key({ modkey, "Control" },
-        "a",
+    awful.key(
+        { modkey, "Control" },
+        "Left",
         function ()
             -- tag_view_nonempty(1)
             local focused =  awful.screen.focused()
