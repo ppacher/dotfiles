@@ -11,6 +11,7 @@ depends=(
   #
   # Window Managment and Composition and widgets
   #
+  'xorg-xinit'
   'awesome-git'
   'feh'
   'picom-tryone-git'
