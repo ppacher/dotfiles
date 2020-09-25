@@ -11,6 +11,14 @@ local random = math.random
 local gcolor = require("gears.color")
 local parse_color = gcolor.parse_color
 
+local function linear_bottom_border_bg(size, normal, border)
+    return 'linear:0,0:0,' .. size .. ':0,' ..
+        normal .. ':0.9,' ..
+        normal .. ':0.9,' ..
+        border .. ':1,' ..
+        border;
+end
+
 -- Returns a value that is clipped to interval edges if it falls outside the interval
 local function clip(num, min_num, max_num) return
     max(min(num, max_num), min_num) end
@@ -157,4 +165,5 @@ return {
     rotate_hue = rotate_hue,
     lighten = lighten,
     darken = darken,
+    linear_bottom_border_bg = linear_bottom_border_bg
 }

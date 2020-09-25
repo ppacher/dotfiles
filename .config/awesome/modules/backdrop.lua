@@ -40,7 +40,7 @@ local function backdrop(c)
         c.backdrop = wibox {
             ontop = true,
             bg = '#00000066',
-            type = 'splash'
+            type = 'splash',
             -- input_passthrough = true
         }
         c:connect_signal('property::geometry', update)

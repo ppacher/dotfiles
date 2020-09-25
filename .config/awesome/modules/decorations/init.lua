@@ -22,7 +22,8 @@ function decorations.hide(c)
 end
 
 function decorations.init()
-    require("decorations.titlebars")
+    require("modules.decorations.titlebars")
+
 
     -- Client shape
     --
@@ -39,12 +40,27 @@ function decorations.init()
             c.shape = helpers.rrect(beautiful.border_radius)
         end
     end
-    client.connect_signal("manage", update_shape)
+
+    -- Enable THICC Title Bars only while Floating
+    local function update_decorations(c)
+        if not c.skip_decoration and (c.floating or awful.layout.get(mouse.screen) == awful.layout.suit.floating) then
+            decorations.show(c)
+        else
+            decorations.hide(c)
+        end
+    end
+
+    client.connect_signal("manage", function(c)
+        update_shape(c)
+        update_decorations(c)
+    end)
     client.connect_signal("property::fullscreen", update_shape)
     client.connect_signal("property::maximized", update_shape)
+    client.connect_signal("property::floating", update_decorations)
     tag.connect_signal("property::layout", function(t)
         for k, c in pairs(t:clients()) do
             update_shape(c)
+            update_decorations(c)
         end
     end)
 end

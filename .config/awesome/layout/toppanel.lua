@@ -5,6 +5,10 @@ local beautiful     = require("beautiful")
 local xresources    = require("beautiful.xresources")
 local modkey        = require("config.keys.mod").modKey
 
+local tagList = require('widgets.tag-list')
+
+local dpi = xresources.apply_dpi
+
 --- {{{ Systray Widget
 local systray = wibox.widget.systray()
 systray:set_base_size(beautiful.systray_icon_size)
@@ -117,12 +121,36 @@ screen.connect_signal('request::desktop_decoration', function(s)
 
     -- Create the wibox
     s.mywibox = awful.wibar({
-        position = "top",
         screen = s,
-        ontop = true
+        ontop = true,
+        visible = false,
     })
 
+    --[[
+    s.padding = {
+        top = dpi(38),
+    }
+
+    local offsetx = dpi(3)
+    local offsety = dpi(3)
+    s.mywibox = wibox({
+        position = "top",
+        ontop = false,
+        screen = s,
+        height = dpi(32),
+        width = dpi(240),
+        x = s.geometry.x + offsetx,
+        y = s.geometry.y + offsety,
+        stretch = false,
+        --bg = beautiful.primary.hue_900,
+        fg = beautiful.fg_normal,
+        struts = {top = dpi(32)},
+        visible = true,
+    })
+    ]]--
+
     -- Create a taglist widget
+    --[[
     s.mytaglist = awful.widget.taglist{
         screen = s,
         filter = awful.widget.taglist.filter.all,
@@ -151,6 +179,8 @@ screen.connect_signal('request::desktop_decoration', function(s)
         },
         buttons = taglist_buttons
     }
+    --]]
+    s.mytaglist = tagList(s)
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist {

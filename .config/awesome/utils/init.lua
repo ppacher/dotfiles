@@ -1,4 +1,6 @@
 return {
     color = require('utils.color'),
-    buttons = require('utils.buttons')
+    panel = require('utils.panel'),
+    buttons = require('utils.buttons'),
+    icons = require('utils.icons'),
 }

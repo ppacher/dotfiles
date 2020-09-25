@@ -64,10 +64,12 @@ require("layout")
 --}}}
 
 
+--awful.screen.set_auto_dpi_enabled(true)
+
 -- Decorations
 --
-local decorations = require("decorations")
-decorations.init()
+--local decorations = require("decorations")
+--decorations.init()
 
 -- Widget and layout library
 local wibox = require("wibox")
@@ -120,30 +122,11 @@ awful.mouse.append_global_mousebindings({
 })
 -- }}}
 
--- {{{ Enable THICC Title Bars only while Floating
---
-local update_decorations = function(c)
-    if not c.skip_decoration and (c.floating or awful.layout.get(mouse.screen) == awful.layout.suit.floating) then
-        decorations.show(c)
-    else
-        decorations.hide(c)
-    end
-end
-
-client.connect_signal("manage", update_decorations)
-client.connect_signal("property::floating", update_decorations)
-tag.connect_signal("property::layout", function(t)
-    for k, c in pairs(t:clients()) do
-        update_decorations(c)
-    end
-end)
--- }}}
-
 
 -- {{{ Signals
 
 -- Idle handling
---  - show app drawer after a minute
+--  - show app drawer after a minskip_decoration = true,ute
 --  - active screensaver after 5 minutes
 awesome.connect_signal("evil::idle", function(idletime)
     if idletime == "5min" then

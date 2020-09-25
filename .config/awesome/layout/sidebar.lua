@@ -7,8 +7,8 @@ local dpi       = require("beautiful").xresources.apply_dpi
 
 local height = beautiful.sidebar_height or awful.screen.focused().geometry.height
 sidebar = wibox {
-    visible = false,
-    ontop = true,
+    visible = true,
+    ontop = false,
     type = "dock",
     bg = beautiful.sidebar_bg or beautiful.xbackground .. 'df',
     fg = beautiful.sidebar_fg or beautiful.xforeground,
@@ -23,16 +23,18 @@ sidebar:buttons(gears.table.join(
         if app_drawer_show then
             app_drawer_show()
         end
-        sidebar.visible = false
+        sidebar.ontop = false
     end),
     -- Middle click - Hide sidebar
     awful.button({ }, 2, function ()
-        sidebar.visible = false
+        sidebar.ontop = false
     end)
 ))
 
 sidebar:connect_signal("mouse::leave", function ()
     sidebar.visible = false
+    sidebar.ontop = false
+    sidebar.visible = true
 end)
 
 -- Activate sidebar by moving the mouse at the edge of the screen
@@ -47,6 +49,7 @@ local sidebar_activator = wibox {
 }
 
 sidebar_activator:connect_signal("mouse::enter", function ()
+    sidebar.ontop = true
     sidebar.visible = true
 end)
 
@@ -83,7 +86,6 @@ local fancy_time = {
 
 
 --- {{{ Date
-
 local fancy_date_widget = wibox.widget.textclock('%A %d')
 fancy_date_widget.markup = helpers.colorize_text(fancy_date_widget.text, beautiful.xcolor12)
 fancy_date_widget:connect_signal("widget::redraw_needed", function () 

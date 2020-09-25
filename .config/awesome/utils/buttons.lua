@@ -18,7 +18,7 @@ local function add_default_button(btn, args)
     local btn_type = args.type or 'basic'
     local color = args.color or '#D8DEE9'
     local shape = args.shape or 'circle'
-    local onclick = args.onclick or function () end
+    local onclick = args.onclick
     local border_width = args.outline_border_width or dpi(1)
 
     if btn_type == 'outline' then
@@ -46,14 +46,19 @@ local function add_default_button(btn, args)
         widget = btn,
         type = btn_type,
         hover_color = args.hover_color,
+        bg = args.color or args.bg or color,
     })
 
     buttons.add_press_effect{
         widget = btn,
     }
 
-    btn:connect_signal("button::release", onclick)
+    if onclick then
+        btn:connect_signal("button::release", onclick)
+    end
 end
+
+buttons.make_default_button = add_default_button
 
 buttons.add_hover_effect = function(args)
     local old_cursor, old_wibox
@@ -62,17 +67,20 @@ buttons.add_hover_effect = function(args)
     local hover_color = args.hover_color or '#00000044'
 
     widget:connect_signal("mouse::enter", function(c)
-        if btn_type ~= 'flat' then
+        if c and c.set_bg and btn_type ~= 'flat' then
             c:set_bg(hover_color)
         end
+
         local wb = mouse.current_wibox
+        if not wb then return end
+
         old_cursor, old_wibox = wb.cursor, wb
         wb.cursor = "hand1"
     end)
 
     widget:connect_signal("mouse::leave", function(c)
-        if btn_type ~= 'flat' then
-            c:set_bg('#00000000')
+        if c and c.set_bg and btn_type ~= 'flat' then
+            c:set_bg(args.bg or '#00000000')
         end
         if old_wibox then
             old_wibox.cursor = old_cursor
@@ -86,6 +94,10 @@ buttons.add_press_effect = function(args)
     local widget = args.widget
 
     widget:connect_signal("button::press", function(c)
+        if not c or not c.get_bg then
+            return
+        end
+
         local r, g, b, a
         local current = c:get_bg()
 
@@ -117,6 +129,8 @@ buttons.add_press_effect = function(args)
     end)
 
     widget:connect_signal("button::release", function(c)
+        if not c or not c.set_bg then return end
+
         if old_color then
             c:set_bg(old_color)
             old_color = nil
@@ -143,7 +157,7 @@ end
 buttons.with_icon = function(args)
     local icon = args.icon or 'help-circle'
     local size = args.size or dpi(20)
-    args.hover_color = args.color or '#D8DEE9'
+    args.hover_color = args.hover_color or args.color or '#D8DEE9'
 
     if icon:sub(1, 1) ~= '/' then
         if type(buttons.icon_path) == 'function' then
@@ -153,23 +167,40 @@ buttons.with_icon = function(args)
         end
     end
 
+    local result = wibox.widget {
+        image = icon,
+        resize = true,
+        forced_height = size,
+        forced_width = size,
+        widget = wibox.widget.imagebox
+    }
+
+    return buttons.with_margin(result, args)
+end
+
+buttons.with_margin = function(widget, args)
+    local template = {
+        widget,
+        margins = args.margins or 8,
+        widget = wibox.container.margin
+    }
+
+    local margins = {}
+    if type(args.margins) == 'number' then
+        margins.margins = args.margins
+    elseif type(args.margins) == 'table' then
+        margins = args.margins
+    end
+
+    gears.table.crush(template, margins)
+
     local result = wibox.widget{
-        {
-            {
-                image = icon,
-                resize = true,
-                forced_height = size,
-                forced_width = size,
-                widget = wibox.widget.imagebox
-            },
-            margins = 8,
-            widget = wibox.container.margin
-        },
-        bg = '#00000000',
+        template,
+        bg = args.bg or '#00000000',
         widget = wibox.container.background
     }
 
-    add_default_button(result, args)
+    add_default_button(result, args or {})
 
     return result
 end
@@ -194,7 +225,6 @@ buttons.with_text = function(args)
             gears.shape.rounded_rect(cr, width, height, 5)
         end,
         widget = wibox.container.background
-
     }
 
     add_default_button(result, args)

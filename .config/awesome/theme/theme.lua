@@ -1,11 +1,3 @@
---  _   _                         
--- | |_| |__   ___ _ __ ___   ___ 
--- | __| '_ \ / _ \ '_ ` _ \ / _ \
--- | |_| | | |  __/ | | | | |  __/
---  \__|_| |_|\___|_| |_| |_|\___|
-                               
-
-
 local theme_assets  = require("beautiful.theme_assets")
 local xresources    = require("beautiful.xresources")
 local gears         = require("gears")
@@ -14,6 +6,7 @@ local helpers       = require("helpers")
 local dpi           = xresources.apply_dpi
 local xrdb          = xresources.get_current_theme()
 local themes_path   = gfs.get_themes_dir()
+local make_bottom_border = require('utils.color').linear_bottom_border_bg
 
 -- Inherit default theme
 local theme = dofile(themes_path.."default/theme.lua")
@@ -99,10 +92,12 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 -- menu_[border_color|border_width]
 
 -- Taglist
-theme.taglist_font = "awesomewm-font 13"
+theme.taglist_font = "awesomewm-font 12"
 theme.taglist_bg = theme.xbackground
 --theme.taglist_shape = gears.shape.triagle
-theme.taglist_bg_focus = theme.xbackground
+
+theme.taglist_bg_focus = make_bottom_border(28, theme.xbackground, theme.xcolor4)
+
 theme.taglist_fg_focus = theme.xcolor4
 theme.taglist_bg_urgent = theme.xbackground
 theme.taglist_fg_urgent = theme.xcolor1
@@ -113,20 +108,18 @@ theme.taglist_fg_empty = theme.xcolor8
 theme.taglist_bg_volatile = transparent
 theme.taglist_fg_volatile = theme.xcolor11
  --Tasklist
-theme.tasklist_font = "Iosevka Extended 9"
-theme.tasklist_disable_icon = true
-theme.tasklist_plain_task_name = true
-theme.tasklist_bg_focus = theme.xbackground
-theme.tasklist_fg_focus = theme.xforeground
-theme.tasklist_bg_minimize = theme.xcolor0 .. "77"
-theme.tasklist_fg_minimize = theme.xforeground .."77"
+
+theme.tasklist_font = "Iosevka Extended 11"
+theme.tasklist_bg_focus = make_bottom_border(28, theme.xbackground, theme.xcolor4) -- theme.xbackground
+theme.tasklist_bg_minimize = make_bottom_border(28, theme.xbackground, theme.xcolor5 .. "50")
 theme.tasklist_bg_normal = theme.xbackground
+theme.tasklist_bg_urgent = make_bottom_border(28, theme.xbackground, theme.xcolor1)
+
+theme.tasklist_fg_focus = theme.xforeground
+theme.tasklist_fg_minimize = theme.xforeground .."77"
 theme.tasklist_fg_normal = theme.xforeground .."77"
-theme.tasklist_disable_task_name = false
-theme.tasklist_disable_icon = true 
--- theme.tasklist_font_minimized = "sans italic 8"
-theme.tasklist_bg_urgent = theme.xbackground
 theme.tasklist_fg_urgent = theme.xcolor3
+
 theme.tasklist_spacing = dpi(0)
 theme.tasklist_align = "center"
 
@@ -186,7 +179,8 @@ theme.menu_border_width  = dpi(0)
 -- pop up
 theme.hotkeys_font = "Iosevka Extended 8"
 -- Recolor Layout icons:
-theme = theme_assets.recolor_layout(theme, theme.xforeground)
+theme = theme_assets.recolor_layout(theme, theme.xbackground)
+
 -- Titlebar buttons: Define the images to load
 theme.titlebar_close_button_normal = tip .. "close_normal.svg"
 theme.titlebar_close_button_focus  = tip .. "close_focus.svg"
@@ -209,15 +203,15 @@ theme.titlebar_minimize_button_focus_hover  = tip .. "minimize_focus_hover.svg"
 --theme.titlebar_maximized_button_focus_active_hover  = tip .. "maximized_focus_active_hover.svg"
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
---theme.icon_theme = "/usr/share/icons/Numix"
+
+theme.icon_theme = "/usr/share/icons/Flat-Remix-Green-Dark"
+
 -- Generate Awesome icon:
 --theme.awesome_icon = theme_assets.awesome_icon(
 --    theme.menu_height, theme.bg_focus, theme.fg_focus
 --)
 -- layout list 
--- Define the icon theme for application icons. If not set then the icons
--- from /usr/share/icons and /usr/share/icons/hicolor will be used.
--- Useless gaps
+
 theme.useless_gap = 10
 theme.sidebar_position = "left"
 theme.sidebar_width = 325

@@ -71,6 +71,7 @@ ruled.client.connect_signal('request::rules', function()
         class = { "kitty" }
       },
       properties = {
+        skip_decoration = true,
         floating = true,
         placement = awful.placement.centered,
         rounded_corners = true,
