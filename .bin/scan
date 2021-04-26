@@ -1,0 +1,26 @@
+#!/bin/bash
+
+DEVICE="pixma:MX490_10.8.1.103"
+tmpfile=$(mktemp /tmp/scan.XXXXXX)
+
+set -e
+
+scanimage                       \
+    --format tiff               \
+    --resolution 300            \
+    --output-file "$tmpfile"    \
+    --device-name $DEVICE       \
+    --progress
+
+output="$1"
+if [ "$output" == "" ]; then
+    output="~/Documents/Scan$(basename "$tmpfile").pdf"
+fi
+
+mkdir -p $(dirname $output)
+
+tiff2pdf -j -q 75 -t "Document" -f -o "$output" "$tmpfile"
+
+echo "$output"
+
+#rm "$tmpfile"

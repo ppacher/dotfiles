@@ -1,171 +1,154 @@
--- awesome_mode: api-level=4:screen=on
-
+-- rc.lua
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
-local gears     = require("gears")
-local awful     = require("awful")
+-- Standard awesome library
+local gfs = require("gears.filesystem")
+local awful = require("awful")
+require("awful.autofocus")
+
+-- Theme handling library
 local beautiful = require("beautiful")
 
--- Theme {{{
--- ------------------------------------
-beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
--- }}}
-
--- {{{ Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
+-- Notification library
 local naughty = require("naughty")
-if awesome.startup_errors then
-    naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
-end
 
--- Handle runtime errors after startup
-do
-    local in_error = false
-    awesome.connect_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then return end
-        in_error = true
-
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = tostring(err) })
-        in_error = false
-    end)
-end
--- }}}
-
--- {{{ Theme Widget configurations
-require('utils.buttons').icon_path = gears.filesystem.get_configuration_dir() .. 'theme/icons/feather/'
--- }}}
-
--- Client and keys and layouts configuration {{{
--- ------------------------------------
-require('config.layouts')
-require('config.tags')
-require('config.keys.global')
-require('config.client')
-
--- Modules {{{
--- ------------------------------------
-local modules = require('module-system')
-modules:start()
-
-local notifs = require("notifications")
-notifs.init()
-
--- Layout {{{
--- ------------------------------------
-require("layout")
---}}}
-
-
---awful.screen.set_auto_dpi_enabled(true)
-
--- Decorations
---
---local decorations = require("decorations")
---decorations.init()
-
--- Widget and layout library
-local wibox = require("wibox")
-
-local hotkeys_popup = require("awful.hotkeys_popup")
-screen_width = awful.screen.focused().geometry.width
-screen_height = awful.screen.focused().geometry.height
-
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
+require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
+-- Check if awesome encountered an error during startup and fell back to
+-- another config (This code will only ever execute for the fallback config)
+naughty.connect_signal("request::display_error", function(message, startup)
+    naughty.notification {
+        urgency = "critical",
+        title = "Oops, an error happened" ..
+            (startup and " during startup!" or "!"),
+        message = message
+    }
+end)
 
--- {{{ Menu
--- Create a launcher widget and a main menu
-local myawesomemenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
-}
+-- Initialize Theme
+local theme = "ghosts"
+beautiful.init(gfs.get_configuration_dir() .. "theme/" .. theme .. "/theme.lua")
 
-local mymainmenu = awful.menu {
-    items = {
-        { "awesome", myawesomemenu },
-    },
-}
+-- Import Configuration
+require("configuration")
 
--- Keyboard map indicator and switcher
+-- Screen Padding and Tags
+screen.connect_signal("request::desktop_decoration", function(s)
+    -- Screen padding
+    screen[s].padding = {left = 0, right = 0, top = 0, bottom = 0}
+    -- Each screen has its own tag table.
+    awful.tag({"1", "2", "3", "4", "5"}, s, awful.layout.layouts[1])
+end)
 
-local function set_wallpaper(s)
-    -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
-        -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
+-- Import Daemons and Widgets
+require("signal")
+require("ui")
+
+awful.spawn.with_shell("~/.screenlayout/layout.sh")
+
+-- Garbage Collector Settings
+collectgarbage("setpause", 110)
+collectgarbage("setstepmul", 1000)
+-- Use the following for a less intense, more battery saving GC
+-- collectgarbage("setpause", 160)
+-- collectgarbage("setstepmul", 400)
+--[[
+local wibox = require("wibox")
+local helpers = require("helpers")
+local gears = require("gears")
+local create_button = function(symbol, color, command, playpause)
+    local icon = wibox.widget {
+        markup = helpers.colorize_text(symbol, color),
+        font = "FiraCode Nerd Font Mono 20",
+        align = "center",
+        valigin = "center",
+        widget = wibox.widget.textbox()
+    }
+    local button = wibox.widget {
+        icon,
+        forced_height = 30,
+        forced_width = 30,
+        widget = wibox.container.background
+    }
+    awesome.connect_signal("bling::playerctl::status", function(playing)
+        if playpause then
+            if playing then
+                icon.markup = helpers.colorize_text("", color)
+            else
+                icon.markup = helpers.colorize_text("", color)
+            end
         end
-        gears.wallpaper.maximized(wallpaper, s, true)
-    end
+    end)
+    button:buttons(gears.table.join(
+                       awful.button({}, 1, function() command() end)))
+    button:connect_signal("mouse::enter", function()
+        icon.markup = helpers.colorize_text(icon.text, beautiful.xforeground)
+    end)
+    button:connect_signal("mouse::leave", function()
+        icon.markup = helpers.colorize_text(icon.text, color)
+    end)
+    return button
 end
-screen.connect_signal("property::geometry", set_wallpaper)
--- }}}
-
-
--- {{{ Mouse bindings
-awful.mouse.append_global_mousebindings({
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+local play_command =
+    function() awful.spawn.with_shell("playerctl play-pause") end
+local prev_command = function() awful.spawn.with_shell("playerctl previous") end
+local next_command = function() awful.spawn.with_shell("playerctl next") end
+local playerctl_play_symbol = create_button("", beautiful.xcolor4,
+                                            play_command, true)
+local playerctl_prev_symbol = create_button("玲", beautiful.xcolor4,
+                                            prev_command, false)
+local playerctl_next_symbol = create_button("怜", beautiful.xcolor4,
+                                            next_command, false)
+local art = wibox.widget {
+    image = gfs.get_configuration_dir() .. "images/me.png",
+    resize = true,
+    forced_height = 200,
+    forced_width = 200,
+    -- clip_shape = helpers.rrect(12),
+    widget = wibox.widget.imagebox
+}
+awesome.connect_signal("bling::playerctl::title_artist_album",
+                       function(_, _, art_path)
+    -- Set art widget
+    art:set_image(gears.surface.load_uncached(art_path))
+end)
+local draggable_player = wibox({
+    visible = true,
+    ontop = true,
+    width = 200,
+    height = 265,
+    bg = beautiful.xbackground .. 00,
+    widget = {
+        {
+            art,
+            bg = beautiful.xbackground .. 00,
+            shape = helpers.rrect(12),
+            border_width = beautiful.widget_border_width + 1,
+            border_color = beautiful.widget_border_color,
+            widget = wibox.container.background
+        },
+        helpers.vertical_pad(15),
+        {
+            {
+                playerctl_prev_symbol,
+                playerctl_play_symbol,
+                playerctl_next_symbol,
+                layout = wibox.layout.flex.horizontal
+            },
+            forced_height = 50,
+            bg = beautiful.xcolor0,
+            shape = helpers.rrect(12),
+            widget = wibox.container.background
+        },
+        layout = wibox.layout.fixed.vertical
+    }
 })
--- }}}
-
-
--- {{{ Signals
-
--- Idle handling
---  - show app drawer after a minskip_decoration = true,ute
---  - active screensaver after 5 minutes
-awesome.connect_signal("evil::idle", function(idletime)
-    if idletime == "5min" then
-        app_drawer_show()
-    end
-    if idletime == "10min" then
-        awesome.emit_signal("evil::screensaver", true)
-    end
+draggable_player:connect_signal("mouse::enter", function()
+    awful.mouse.wibox.move(draggable_player)
 end)
+]] --
 
--- Signal function to execute when a new client appears.
-client.connect_signal("manage", function(c)
-    -- Set the windows at the slave,
-    -- i.e. put it at the end of others instead of setting it master.
-    --
-    -- if not awesome.startup then awful.client.setslave(c) end
-    if awesome.startup
-      and not c.size_hints.user_position
-      and not c.size_hints.program_position then
-        -- Prevent clients from being unreachable after screen count changes.
-        awful.placement.no_offscreen(c)
-    end
-end)
-
--- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:activate { context = "mouse_enter", raise = false }
-end)
-
--- Change client border when focused/unfocused
-client.connect_signal(
-    'focus', 
-    function(c)
-        c.border_color = beautiful.border_focus
-    end
-)
-client.connect_signal(
-    'unfocus', 
-    function(c)
-        c.border_color = beautiful.border_normal
-    end
-)
+-- EOF ------------------------------------------------------------------------

@@ -1,9 +1,33 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+# Wrapper for amazing software giph by phisch
 
 file="$HOME/Pictures/screenshots/gif_$(date '+%Y-%m-%d%H:%M:%S').gif"
+file2="$HOME/Videos/vid_$(date '+%Y-%m-%d%H:%M:%S').mp4"
 
-if [ "$2" = "sel" ]; then
-    giph -p 30 -s -t $1 $file
-else 
-    giph -g "1980x1080+0+0" -t $1 $file
-fi
+
+case $1 in
+    "sel")
+        giph -y -s -b 2 -c '0.61,0.9,0.75,1' -p 22 $file
+        ;;
+
+    "selnp")
+        giph -y -s -b 2 -c '0.61,0.9,0.75,1' -p -2 $file
+        ;;
+
+    "selmp4")
+        giph -y -s -f 30 -b 2 -c '0.61,0.9,0.75,1' -p 22 $file2
+        ;;
+    
+    "selnpmp4")
+        giph -y -s -f 30 -b 2 -c '0.61,0.9,0.75,1' -p -2 $file2
+        ;;
+
+    "mp4")
+        giph -y -g "1920x1080+0+0" -f 30 $file2 
+        ;;
+
+    *)
+        giph -y -g "1920x1080+0+0" $file
+        ;;
+esac

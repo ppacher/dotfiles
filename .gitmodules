@@ -1,3 +1,15 @@
 [submodule ".oh-my-zsh/plugins/fzf-zsh-completions"]
 	path = .oh-my-zsh/plugins/fzf-zsh-completions
 	url = https://github.com/chitoku-k/fzf-zsh-completions
+[submodule ".zsh-plugins/fzf-tab"]
+	path = .zsh-plugins/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab.git
+[submodule ".config/firefox-css"]
+	path = .config/firefox-css
+	url = https://github.com/JavaCafe01/firefox-css.git
+[submodule ".config/awesome/module/layout-machi"]
+	path = .config/awesome/module/layout-machi
+	url = https://github.com/xinhaoyuan/layout-machi.git
+[submodule ".config/awesome/module/bling"]
+	path = .config/awesome/module/bling
+	url = https://github.com/Nooo37/bling.git
