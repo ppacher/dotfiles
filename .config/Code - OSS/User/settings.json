@@ -6,9 +6,14 @@
     "editor.scrollBeyondLastLine": false,
     "vscode-neovim.neovimPath": "/usr/bin/nvim",
     "window.menuBarVisibility": "toggle",
-    "workbench.colorTheme": "Xresources",
+    "workbench.colorTheme": "GitHub Light",
     "explorer.confirmDelete": false,
     "editor.formatOnSave": true,
     "typescript.updateImportsOnFileMove.enabled": "always",
-    "explorer.confirmDragAndDrop": false
+    "explorer.confirmDragAndDrop": false,
+    "go.useLanguageServer": true,
+    "window.zoomLevel": 0,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "go.toolsManagement.autoUpdate": true,
+    "angular.experimental-ivy": true
 }

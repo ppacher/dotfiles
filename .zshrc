@@ -1,7 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-#ZSH_THEME="ys"
-ZSH_THEME="paz"
+ZSH_THEME="ys"
+#ZSH_THEME="paz"
 
 plugins=(git forgit dotbare fzf-zsh-completions)
 
