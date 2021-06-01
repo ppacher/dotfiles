@@ -1,0 +1,11 @@
+[Unit]
+Description=Run picom compositor
+
+[Service]
+ExecStart=picom --dbus --config .config/awesome/configuration/picom.conf
+Type=simple
+Restart=always
+
+
+[Install]
+WantedBy=default.target
