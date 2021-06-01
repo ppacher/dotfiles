@@ -1,2 +1,2 @@
 require("ui.bar.wibar")
--- require("ui.bar.sidebar")
+--require("ui.bar.sidebar")

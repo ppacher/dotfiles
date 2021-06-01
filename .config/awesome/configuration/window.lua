@@ -155,7 +155,10 @@ function gears.table.iterate_value(t, value, step_size, filter, start_at)
 end
 
 awful.keygrabber {
-    start_callback = function() layout_popup.visible = true end,
+    start_callback = function()
+        layout_popup.visible = true
+        layout_popup.screen = mouse.screen
+    end,
     stop_callback = function() layout_popup.visible = false end,
     export_keybindings = true,
     stop_event = "release",

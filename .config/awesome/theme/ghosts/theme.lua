@@ -191,7 +191,7 @@ theme = theme_assets.recolor_layout(theme, theme.xforeground)
 
 -- Gaps
 --
-theme.useless_gap = dpi(10)
+theme.useless_gap = dpi(0)
 
 -- Exit Screen
 --
@@ -265,6 +265,10 @@ theme.notification_spacing = 10
 -- Weather
 --
 theme.weather_city = "Dobersberg"
+
+-- Playerctl
+--
+theme.playerctl_backend = 'playerctl_lib'
 
 -- Swallowing
 --

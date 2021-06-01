@@ -55,7 +55,7 @@ collectgarbage("setstepmul", 1000)
 -- Use the following for a less intense, more battery saving GC
 -- collectgarbage("setpause", 160)
 -- collectgarbage("setstepmul", 400)
---[[
+
 local wibox = require("wibox")
 local helpers = require("helpers")
 local gears = require("gears")
@@ -116,7 +116,7 @@ awesome.connect_signal("bling::playerctl::title_artist_album",
     art:set_image(gears.surface.load_uncached(art_path))
 end)
 local draggable_player = wibox({
-    visible = true,
+    visible = false,
     ontop = true,
     width = 200,
     height = 265,
@@ -149,6 +149,5 @@ local draggable_player = wibox({
 draggable_player:connect_signal("mouse::enter", function()
     awful.mouse.wibox.move(draggable_player)
 end)
-]] --
 
 -- EOF ------------------------------------------------------------------------

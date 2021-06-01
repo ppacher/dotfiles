@@ -141,7 +141,7 @@ awful.keyboard.append_global_keybindings(
             description = "edit the current layout if it is a machi layout",
             group = "layout"
         }),
-        awful.key({modkey}, "/",
+        awful.key({modkey, "Shift"}, "7",
                   function() machi.switcher.start(client.focus) end, {
             description = "switch between windows for a machi layout",
             group = "layout"
@@ -300,13 +300,14 @@ client.connect_signal("request::default_keybindings", function()
             end), -- Single tap: Center client 
             -- Double tap: Center client + Floating + Resize
             awful.key({modkey}, "c", function(c)
+                c.floating = true
                 awful.placement.centered(c, {
                     honor_workarea = true,
                     honor_padding = true
                 })
                 helpers.single_double_tap(nil, function()
-                    helpers.float_and_resize(c, screen_width * 0.25,
-                                             screen_height * 0.28)
+                    helpers.float_and_resize(c, screen_width * 0.5,
+                                             screen_height * 0.4)
                 end)
             end)
         })
