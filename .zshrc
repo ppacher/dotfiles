@@ -27,10 +27,12 @@ export PAGER="less"
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 
+
 #
 # Emoji-cli
 #
 source /usr/share/zsh/plugins/emoji-cli/emoji-cli.zsh
+
 
 #
 # Colorize manpages
@@ -62,7 +64,7 @@ setopt prompt_subst
 #PROMPT='%F{5}%F{%(?.6.1)} > %f% '
 #PROMPT='%F{5}%F{%(?.6.1)} > %f%F{8}|%f '
 
-export SUDO_PROMPT=$'Password for ->\033[32;05;16m %u\033[0m:  '
+export SUDO_PROMPT=$'Password for [\033[32;05;16m%u\033[0m]  '
 
 
 #
@@ -122,13 +124,14 @@ precmd() {
     printf '\033]0;%s\007' "$(dirs)"
 }
 
-source ~/.zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
+#source ~/.zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # Solarized colors
 export FZF_DEFAULT_OPTS='
 --color fg:#ffffff,bg:#1a2026,hl:#A3BE8C,fg+:#D8DEE9,bg+:#1a2026,hl+:#A3BE8C,border:#3b4b58
 --color pointer:#f9929b,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#9ce5c0,marker:#EBCB8B
 '
+
 
 FZF_TAB_COMMAND=(
     fzf
@@ -141,10 +144,8 @@ FZF_TAB_COMMAND=(
     '--header-lines=$#headers' # $#headers will be expanded to lines of headers at runtime
 )
 zstyle ':fzf-tab:*' command $FZF_TAB_COMMAND
-
 zstyle ':completion:complete:*:options' sort false
 zstyle ':fzf-tab:complete:_zlua:*' query-string input
-
 zstyle ':fzf-tab:complete:*:*' fzf-preview '$HOME/.bin/preview.sh $realpath'
 
 # Set PATH so it includes user's private bin directories
@@ -153,3 +154,4 @@ export PATH="${HOME}/.bin:${HOME}/.local/bin:${HOME}/go/bin:${HOME}/.emacs.d/bin
 clear ; lastlogin ; fetch
 
 #alias luamake=/home/javacafe01/git-stuff/lua-language-server/3rd/luamake/luamake
+ 

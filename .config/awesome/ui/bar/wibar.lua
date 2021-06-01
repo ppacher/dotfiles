@@ -133,16 +133,11 @@ local g = gears.timer {
 }
 
 -- The charging animation
-local running = false
 awesome.connect_signal("signal::charger", function(plugged)
     if plugged then
         g:again()
-        running = true
     else
-        if running then
-            g:stop()
-            running = false
-        end
+        g:stop()
     end
 end)
 

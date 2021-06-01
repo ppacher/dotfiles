@@ -21,15 +21,14 @@ autostart_apps = {
     -- Disable Bell
     "xset -b", 
 
+    -- Keyboard
+    "setxkbmap -layout de",
+
     -- Layout
     -- "~/.screenlayout/layout.sh", 
 
     -- Bluetooth
     "blueman-applet", 
-
-    -- Compositor
-    "picom --dbus --config " ..
-        gears.filesystem.get_configuration_dir() .. "configuration/picom.conf",
 
     -- Media controller daemon
     "playerctld daemon"
