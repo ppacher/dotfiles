@@ -1,0 +1,9 @@
+[Unit]
+Description=Should run before test-timer.servier
+
+[Service]
+Type=oneshot
+ExecStart=bash -c "date >> /tmp/test.service.log"
+
+[Install]
+WantedBy=test-service.service

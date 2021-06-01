@@ -8,4 +8,4 @@ Restart=always
 
 
 [Install]
-WantedBy=default.target
+WantedBy=xsession.target

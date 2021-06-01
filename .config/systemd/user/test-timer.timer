@@ -1,0 +1,8 @@
+[Unit]
+Description=Test Timer
+
+[Timer]
+OnCalendar=*:*:0/20
+
+[Install]
+WantedBy=timers.target

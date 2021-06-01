@@ -1,0 +1,6 @@
+[Unit]
+Description=Test Timer Service
+
+[Service]
+Type=oneshot
+ExecStart=bash -c "echo 'test' >> /tmp/test.service.log"
